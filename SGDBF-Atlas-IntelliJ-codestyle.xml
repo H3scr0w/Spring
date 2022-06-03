@@ -1,0 +1,13 @@
+<code_scheme name="SGDBF-Atlas">
+  <TypeScriptCodeStyleSettings>
+    <option name="USE_DOUBLE_QUOTES" value="false" />
+    <option name="FORCE_QUOTE_STYlE" value="true" />
+    <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+    <option name="SPACES_WITHIN_IMPORTS" value="true" />
+    <option name="IMPORT_SORT_MODULE_NAME" value="true" />
+  </TypeScriptCodeStyleSettings>
+  <codeStyleSettings language="JAVA">
+    <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="50"/>
+    <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="50"/>
+  </codeStyleSettings>
+</code_scheme>

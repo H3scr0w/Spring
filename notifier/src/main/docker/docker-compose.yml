@@ -1,0 +1,91 @@
+version: '3.8'
+services:
+  notifier:
+    image: {{atlas.dtr.host}}/sgdbf-atlas/notifier:1.4.0-SNAPSHOT
+    environment:
+      JAVA_OPTS: {{atlas.java.opts}}
+      info.env: {{atlas.stack.name}}
+      HTTP-PORT: {{atlas.notifier.server.http.port}}
+      sgdbf-security.jwt.ca-alias: {{atlas.ucp.secret.api-gateway.label}}
+      sgdbf-security.jwt.key-store: {{atlas.keystore.path}}
+      logging.level.ROOT: {{atlas.logging.level}}
+      logging.level.com.sgdbf: {{atlas.logging.level.com.sgdbf}}
+      logging.file.max-history: {{atlas.logging.file.maxHistory}}
+      sgdbf.kern.elasticsearch.enabled: '{{atlas.kern.elasticsearch.enabled}}'
+      sgdbf.kern.elasticsearch.host: {{atlas.kern.elasticsearch.host}}
+      sgdbf.kern.elasticsearch.port: {{atlas.kern.elasticsearch.port}}
+      sgdbf.kern.elasticsearch.https: '{{atlas.kern.elasticsearch.https}}'
+      sgdbf.kern.elasticsearch.user: {{atlas.kern.elasticsearch.user}}
+      sgdbf.kern.elasticsearch.pass: {{atlas.kern.elasticsearch.pass}}
+      sgdbf.kern.elasticsearch.maxQueueSize: {{atlas.kern.elasticsearch.maxQueueSize}}
+      sgdbf.kern.elasticsearch.maxMessageSize: {{atlas.kern.elasticsearch.maxMessageSize}}
+      sgdbf.cache.hazelcast.port: 5701
+      sgdbf.cache.hazelcast.port-count: 5
+      sgdbf.cache.hazelcast.members: 'tasks.notifier,'
+      sgdbf.cache.hazelcast.cluster-name: 'notifier'
+      key-store: {{atlas.notifier.key-store}}
+      key-alias: {{atlas.notifier.key-alias}}
+      HTTPS-PORT: {{atlas.notifier.server.https.port}}
+      spring.boot.admin.client.url: {{atlas.admin.server.url}}
+      spring.boot.admin.client.username: {{atlas.admin.user.name}}
+      spring.boot.admin.client.password: {{atlas.admin.user.password}}
+    stdin_open: true
+    tty: true
+    secrets:
+      - source: {{atlas.ucp.secret.api-gateway.label}}
+        mode: 0444
+      - source: {{atlas.notifier.secret.keypass}}
+        target: keypass
+        mode: 0444
+      - source: {{atlas.notifier.secret.keystore}}
+        target: keystore
+        mode: 0444
+    ports:
+      - {{atlas.ucp.container.notifier.port}}:{{atlas.notifier.server.https.port}}/tcp
+      - 20007:5701/tcp
+    networks:
+      - local
+    healthcheck:
+      test: curl -s --fail --noproxy '*' http://localhost:{{atlas.notifier.server.http.port}}/actuator/health | grep -q 'UP'
+      interval: {{atlas.ucp.healthcheck.interval}}
+      timeout: {{atlas.ucp.healthcheck.timeout}}
+      retries: {{atlas.ucp.healthcheck.retries}}
+      start_period: {{atlas.ucp.healthcheck.start_period}}
+    deploy:
+      mode: replicated
+      replicas: {{atlas.ucp.deploy.replicas}}
+      placement:
+        max_replicas_per_node: {{atlas.ucp.deploy.maxreplicas}}
+        constraints:
+          - node.role == worker      
+      labels:
+        com.docker.ucp.access.label: {{atlas.ucp.access.label}}
+        com.docker.ucp.access.owner: {{atlas.ucp.access.owner}}
+      resources:
+        limits:
+          cpus: '{{atlas.ucp.limits.cpus}}'
+        reservations:
+          cpus: '{{atlas.ucp.reservations.cpus.low}}'
+      update_config:
+        order: start-first
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+secrets:
+  {{atlas.ucp.secret.api-gateway.label}}:
+    external: true
+  {{atlas.notifier.secret.keypass}}:
+    external: true
+  {{atlas.notifier.secret.keystore}}:
+    external: true
+
+networks:
+  local:
+    driver: overlay
+    labels:
+      com.docker.ucp.access.label: {{atlas.ucp.access.label}}

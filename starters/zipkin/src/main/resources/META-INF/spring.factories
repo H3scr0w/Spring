@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.saintgobain.dsi.starter.zipkin.autoconfigure.ZipkinAutoConfiguration
+
+org.springframework.boot.env.EnvironmentPostProcessor=com.saintgobain.dsi.starter.zipkin.postprocessor.ZipkinEnvironmentPostProcessor

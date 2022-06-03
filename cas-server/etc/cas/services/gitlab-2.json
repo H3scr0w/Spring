@@ -1,0 +1,33 @@
+{
+	"@class": "org.apereo.cas.services.RegexRegisteredService",
+	"serviceId": "^(https|http)://.*(code.website4sg.saint-gobain.(com|io))/?.*$",
+	"name": "Gitlab",
+	"id": 2,
+	"accessStrategy": {
+		"@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+		"enabled": true,
+		"ssoEnabled": true,
+		"requireAllAttributes": false,
+		"rejectedAttributes" : {
+		  "@class" : "java.util.HashMap",
+		  "user_isactive" : [ "java.util.HashSet", [ false ] ]
+		}
+	},
+	"attributeReleasePolicy": {
+		"@class": "org.apereo.cas.services.ChainingAttributeReleasePolicy",
+		"policies": ["java.util.ArrayList", [{
+				"@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
+				"allowedAttributes": {
+					"@class": "java.util.TreeMap",
+					"uid": "email",
+					"cn": "username"
+				}
+			},
+			{
+				"@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+				"allowedAttributes": ["java.util.ArrayList", ["email", "username"]]
+			}
+		]]
+	}
+
+}

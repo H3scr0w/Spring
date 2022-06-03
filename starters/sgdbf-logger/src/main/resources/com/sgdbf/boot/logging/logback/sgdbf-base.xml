@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
+    
+    <springProperty name="elasticHost" source="sgdbf.kern.elasticsearch.host" />
+	<springProperty name="elasticPort" source="sgdbf.kern.elasticsearch.port" />
+	<springProperty name="elasticLogEnabled" source="sgdbf.kern.elasticsearch.enabled" />
+	<springProperty name="elasticHttpsEnabled" source="sgdbf.kern.elasticsearch.https" />
+	<springProperty name="elasticUser" source="sgdbf.kern.elasticsearch.user" />
+	<springProperty name="elasticPass" source="sgdbf.kern.elasticsearch.pass" />
+	<springProperty name="applicationName" source="sgdbf.kern.elasticsearch.application" />
+	<springProperty name="environment" source="info.env"/>
+	<springProperty name="maxQueueSize" source="sgdbf.kern.elasticsearch.maxQueueSize"/>
+	<springProperty name="maxMessageSize" source="sgdbf.kern.elasticsearch.maxMessageSize"/>
+
+	<property name="host" value="${HOSTNAME}" />
+
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+	<logger name="es-error-logger" level="INFO" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+    <if condition="${elasticLogEnabled}">
+		<then>
+			<appender name="ELASTIC"
+				class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
+				<if condition="${elasticHttpsEnabled}">
+					<then>
+						<url>https://${elasticUser}:${elasticPass}@${elasticHost}:${elasticPort}/_bulk</url>
+						<authentication class="com.internetitem.logback.elasticsearch.config.BasicAuthentication" />
+						<type>_doc</type>
+					</then>
+					<else>
+						<url>http://${elasticHost}:${elasticPort}/_bulk</url>
+						<type>default</type>
+					</else>
+				</if>
+				<index>logback-%date{yyyy.MM.dd}</index>
+	            <includeMdc>true</includeMdc>
+				<errorLoggerName>es-error-logger</errorLoggerName>
+				<properties>
+					<property>
+						<name>logger_name</name>
+						<value>%logger</value>
+					</property>
+					<property>
+						<name>thread_name</name>
+						<value>%thread</value>
+					</property>
+					<property>
+						<name>level</name>
+						<value>%level</value>
+					</property>
+					<property>
+						<name>HOSTNAME</name>
+						<value>${HOSTNAME}</value>
+						<allowEmpty>false</allowEmpty>
+					</property>
+					<property>
+						<name>stacktrace</name>
+						<value>%ex</value>
+					</property>
+					<property>
+						<name>application</name>
+						<value>${applicationName}</value>
+					</property>
+					<property>
+						<name>environment</name>
+						<value>${environment}</value>
+					</property>
+					<property>
+						<name>maxQueueSize</name>
+						<value>${maxQueueSize}</value>
+					</property>
+					<property>
+						<name>maxMessageSize</name>
+						<value>${maxMessageSize}</value>
+					</property>
+				</properties>
+				<headers>
+					<header>
+						<name>Content-Type</name>
+						<value>application/json</value>
+					</header>
+				</headers>
+			</appender>
+		</then>
+	</if>
+	
+	<root level="#logback.loglevel#">
+		<if condition="${elasticLogEnabled}">
+			<then>
+				<appender-ref ref="ELASTIC" />
+			</then>
+			<else>
+				<appender-ref ref="CONSOLE" />
+			</else>
+		</if>
+	</root>
+
+</included>

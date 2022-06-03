@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: notifier-deployment
+  labels:
+    app: notifier
+  namespace: {{atlas.k8s.namespace}}
+spec:
+  replicas: {{atlas.ucp.deploy.replicas}}
+  serviceName: notifier
+  selector:
+    matchLabels:
+      app: notifier
+  template:
+    metadata:
+      labels:
+        app: notifier
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: notifier
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - image: {{atlas.dtr.host}}/sgdbf-atlas/notifier:2.0.0-SNAPSHOT
+        name: notifier
+        command: ["/home/docker4sg/entrypoint.sh","/etc/secrets/cer"]
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{atlas.notifier.server.http.port}}
+        - containerPort: {{atlas.notifier.server.https.port}}
+        - containerPort: 5701
+        volumeMounts:
+          - mountPath: "/etc/secrets/cer"
+            name: cer-volume
+            readOnly: true
+          - mountPath: "/etc/secrets/notifier"
+            name: notifier-volume
+            readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: {{atlas.notifier.server.http.port}}
+          initialDelaySeconds: {{atlas.k8s.probes.initialdelay}}
+          periodSeconds: {{atlas.k8s.probes.period}}
+          timeoutSeconds : {{atlas.k8s.probes.timeout}}
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: {{atlas.notifier.server.http.port}}
+          initialDelaySeconds: {{atlas.k8s.probes.initialdelay}}
+          periodSeconds: {{atlas.k8s.probes.period}}
+          timeoutSeconds : {{atlas.k8s.probes.timeout}}
+        resources:
+          limits:
+            cpu: "{{atlas.ucp.limits.cpus}}"
+            memory: "{{atlas.ucp.limits.memory}}"
+          requests:
+            cpu: "{{atlas.ucp.reservations.cpus.low}}"
+            memory: "{{atlas.ucp.requests.memory}}"
+        env:
+        - name: HTTP-PORT
+          value: "{{atlas.notifier.server.http.port}}"
+        - name: HTTPS-PORT
+          value: "{{atlas.notifier.server.https.port}}"
+        - name: JAVA_OPTS
+          value: "{{atlas.java.opts}}"
+        - name: KEYPASS
+          valueFrom:
+            secretKeyRef:
+              name: notifier-spring-secrets
+              key: keypass
+        - name:  info.env
+          value: "{{atlas.k8s.namespace}}"
+        - name:  key-store
+          value: "{{atlas.notifier.key-store}}"
+        - name:  key-alias
+          value: "{{atlas.notifier.key-alias}}"
+        - name:  logging.level.ROOT
+          value: "{{atlas.logging.level}}"
+        - name:  logging.level.com.sgdbf
+          value: "{{atlas.logging.level.com.sgdbf}}"
+        - name:  logging.file.max-history
+          value: "{{atlas.logging.file.maxHistory}}"
+        - name:  spring.boot.admin.client.url
+          value: "{{atlas.admin.server.url}}"
+        - name:  spring.boot.admin.client.username
+          value: "{{atlas.admin.user.name}}"
+        - name:  spring.boot.admin.client.password
+          value: "{{atlas.admin.user.password}}"
+        - name:  sgdbf.kern.elasticsearch.enabled
+          value: "{{atlas.kern.elasticsearch.enabled}}"
+        - name:  sgdbf.kern.elasticsearch.host
+          value: "{{atlas.kern.elasticsearch.host}}"
+        - name:  sgdbf.kern.elasticsearch.port
+          value: "{{atlas.kern.elasticsearch.port}}"
+        - name:  sgdbf.kern.elasticsearch.https
+          value: "{{atlas.kern.elasticsearch.https}}"
+        - name:  sgdbf.kern.elasticsearch.user
+          value: "{{atlas.kern.elasticsearch.user}}"
+        - name:  sgdbf.kern.elasticsearch.pass
+          value: "{{atlas.kern.elasticsearch.pass}}"
+        - name:  sgdbf.kern.elasticsearch.maxQueueSize
+          value: "{{atlas.kern.elasticsearch.maxQueueSize}}"
+        - name:  sgdbf.kern.elasticsearch.maxMessageSize
+          value: "{{atlas.kern.elasticsearch.maxMessageSize}}"
+        - name:  sgdbf-security.jwt.key-store
+          value: "{{atlas.keystore.path}}"
+        - name:  sgdbf-security.jwt.ca-alias
+          value: "{{atlas.ucp.secret.api-gateway.label}}"
+        - name:  sgdbf.cache.hazelcast.port
+          value: "5701"
+        - name:  sgdbf.cache.hazelcast.port-count
+          value: "5"
+        - name:  sgdbf.cache.hazelcast.members
+          value: "notifier,"
+        - name:  sgdbf.cache.hazelcast.cluster-name
+          value: "notifier"
+      volumes:
+        - name: cer-volume
+          secret:
+            secretName: cer-secrets
+        - name: notifier-volume
+          secret:
+            secretName: notifier-secrets
+      imagePullSecrets:
+      - name: dtr-secret
+      securityContext:
+        fsGroup: {{atlas.k8s.fsgroup}}
+        runAsGroup: {{atlas.k8s.runasgroup}}
+        runAsUser: {{atlas.k8s.runasuser}}

@@ -1,0 +1,47 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/DECORATION/1.7.0"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd">
+
+    <!-- Utilisation du template de site fluido-->
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin> 
+
+    <!-- Affichage de la date et de la version à droite dans le bandeau du haut -->
+    <publishDate position="right"/>
+    <version position="right"/>
+
+    <body>
+        <!-- Ajout d'un fil d'ariane -->
+        <breadcrumbs>
+            <item name="Accueil" href="index.html"/>
+        </breadcrumbs>
+
+        <!-- ===== Menus ===== -->
+         <menu name="Introduction">
+            <item name="Overview" href="overview.html"/>
+	</menu>
+         <menu name="Architecture &amp; Secutiry">
+	    <item name="Architecture" href="architecture.html"/>
+            <item name="Authentication" href="authentication.html"/>
+            <item name="JWT Format" href="jwt.html"/>
+            <item name="Profiles &amp; Roles" href="profilesroles.html"/>
+	</menu>
+         <menu name="Functional Processes">
+	    <item name="Deployment workflow" href="deploymentworkflow.html"/>
+            <item name="Business Rules" href="businessrules.html"/>
+	</menu>
+         <menu name="Persistence layer">
+	    <item name="Persistence layer" href="persistencelayer.html"/>
+	    <item name="Persistence layer Design Rules" href="persistencelayerrules.html"/>
+	</menu>
+         <menu name="API layer">
+            <item name="Roles &amp; Endpoints Matrix" href="rolesperendpoints.html"/>
+            <item name="API Design Rules" href="apirules.html"/>
+            <item name="Rest API Documentation" href="restapi.html"/>
+
+        </menu>    
+        <!--<menu ref="reports" inherit="top"/>  -->     
+    </body>
+</project>

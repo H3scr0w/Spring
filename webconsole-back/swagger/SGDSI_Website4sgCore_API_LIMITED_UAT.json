@@ -1,0 +1,3559 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Website4sg Core API Limited UAT documentation",
+    "version" : "1.3",
+    "title" : "SGDSI Website4sg Core API Limited UAT"
+  },
+  "host" : "uat-core-api.website4sg.saint-gobain.com",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "toolsincapsulasites"
+  }, {
+    "name" : "v1deployment"
+  }, {
+    "name" : "v1drupaldocrootcore"
+  }, {
+    "name" : "v1hostingdocroots"
+  }, {
+    "name" : "v1hostingdomains"
+  }, {
+    "name" : "v1projects"
+  }, {
+    "name" : "v1repository"
+  }, {
+    "name" : "v1request"
+  }, {
+    "name" : "v1users"
+  }, {
+    "name" : "v1websites"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/tools/incapsula/sites/status/{domainCode}" : {
+      "post" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Get site status from Incapsula",
+        "description" : "Get site status from Incapsula",
+        "operationId" : "getStatus",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Site",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/WAF Site"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/cache/mode" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure cache mode of a site in Incapsula",
+        "description" : "Configure cache mode of a site in Incapsula",
+        "operationId" : "configureCacheMode",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Cache Mode",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF CacheMode"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/cache/purge" : {
+      "delete" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Purge cache of a site in Incapsula",
+        "description" : "Purge cache of a site in Incapsula",
+        "operationId" : "purgeCache",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/cache/rules" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure cache rules of a site in Incapsula",
+        "description" : "Configure cache rules of a site in Incapsula",
+        "operationId" : "configureCacheRules",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Cache Rules",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF CacheRules"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/cache/settings" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure cache settings of a site in Incapsula",
+        "description" : "Configure cache settings of a site in Incapsula",
+        "operationId" : "configureCacheSettings",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Cache Settings",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF CacheSettings"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/certificate" : {
+      "delete" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Remove the certificate of the site from Incapsula",
+        "description" : "Remove the certificate of the site from Incapsula",
+        "operationId" : "removeCertificate",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/certificate/{certificateCode}" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Upload the certificate to the site in Incapsula",
+        "description" : "Upload the certificate to the site in Incapsula",
+        "operationId" : "uploadCertificate",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "certificateCode",
+          "in" : "path",
+          "description" : "Certificate Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/configure/acl" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure acl in Incapsula",
+        "description" : "Configure acl in Incapsula",
+        "operationId" : "configureAcl",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Acls Configuration",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF AclsConfiguration"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/configure/security" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure security in Incapsula",
+        "description" : "Configure security in Incapsula",
+        "operationId" : "configureSecurity",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Threats Configuration",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF ThreatsConfiguration"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/configure/site" : {
+      "put" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Configure origin server in Incapsula",
+        "description" : "Configure origin server in Incapsula",
+        "operationId" : "configureSite",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Site",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WAF Site"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/stats/{statsId}" : {
+      "get" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Get stats of a site from Incapsula",
+        "description" : "Get stats of a site from Incapsula",
+        "operationId" : "getStats",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "statsId",
+          "in" : "path",
+          "description" : "Stats Id",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "visits_timeseries", "hits_timeseries", "bandwidth_timeseries", "requests_geo_dist_summary", "visits_dist_summary", "caching", "caching_timeseries", "threats", "incap_rules", "incap_rules_timeseries" ]
+        }, {
+          "name" : "timeRange",
+          "in" : "query",
+          "description" : "The Time Range",
+          "required" : false,
+          "type" : "string",
+          "default" : "today",
+          "enum" : [ "today", "last_7_days", "last_30_days", "last_90_days", "month_to_date" ]
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tools/incapsula/sites/{domainCode}/visits" : {
+      "get" : {
+        "tags" : [ "toolsincapsulasites" ],
+        "summary" : "Get all visits of a site from Incapsula",
+        "description" : "Get all visits of a site from Incapsula",
+        "operationId" : "getAllVisits",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "timeRange",
+          "in" : "query",
+          "description" : "The Time Range",
+          "required" : false,
+          "type" : "string",
+          "default" : "today",
+          "enum" : [ "today", "last_7_days", "last_30_days", "last_90_days", "month_to_date" ]
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operation successfully done.",
+            "schema" : {
+              "$ref" : "#/definitions/IncapsulaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Invalid data supplied"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/deployment" : {
+      "get" : {
+        "tags" : [ "v1deployment" ],
+        "summary" : "Get all Deployment",
+        "description" : "",
+        "operationId" : "getAlldeployments",
+        "parameters" : [ {
+          "name" : "status",
+          "in" : "query",
+          "description" : "Deployment status",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "REQUESTED", "IN_PROGRESS", "ACCEPTED", "SUCCEEDED", "FAILED", "ABORTED" ]
+          },
+          "collectionFormat" : "multi",
+          "x-example" : "status=REQUESTED,IN_PROGRESS or status=REQUESTED&status=IN_PROGRESS"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "Search filter",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Deployment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/deployment/{deploymentId}/" : {
+      "get" : {
+        "tags" : [ "v1deployment" ],
+        "summary" : "Get the detail of a deployment",
+        "description" : "",
+        "operationId" : "getDeploymentDetail",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Deployment Id",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Deployment"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/deployment/{deploymentId}/cancel" : {
+      "post" : {
+        "tags" : [ "v1deployment" ],
+        "summary" : "Cancel a request deployment",
+        "description" : "",
+        "operationId" : "cancel",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Deployment Id",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Deployment"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/deployment/{deploymentId}/deploy" : {
+      "post" : {
+        "tags" : [ "v1deployment" ],
+        "summary" : "Validate a request deployment",
+        "description" : "",
+        "operationId" : "deploy",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Deployment Id",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Deployment"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/deployment/{deploymentId}/logs" : {
+      "get" : {
+        "tags" : [ "v1deployment" ],
+        "summary" : "Get logs from Rundeck",
+        "description" : "",
+        "operationId" : "getLogs",
+        "parameters" : [ {
+          "name" : "deploymentId",
+          "in" : "path",
+          "description" : "Deployment Id",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/drupaldocrootcore" : {
+      "get" : {
+        "tags" : [ "v1drupaldocrootcore" ],
+        "summary" : "Get all DrupalDocrootCore",
+        "description" : "",
+        "operationId" : "getAllDrupalDocrootCore",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "The name of drupal",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "The search engine",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/DrupalDocrootCoreHeader"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/drupaldocrootcore/{drupaldocrootCoreCode}" : {
+      "get" : {
+        "tags" : [ "v1drupaldocrootcore" ],
+        "summary" : "Get the DrupalDocrootCore detail",
+        "description" : "",
+        "operationId" : "getDrupalDocrootCoreDetail",
+        "parameters" : [ {
+          "name" : "drupaldocrootCoreCode",
+          "in" : "path",
+          "description" : "DrupalDocrootCore Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/DrupalDocrootCoreBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/drupaldocrootcore/{drupaldocrootCoreCode}/docroots" : {
+      "get" : {
+        "tags" : [ "v1drupaldocrootcore" ],
+        "summary" : "Get the docroot list using the specified DrupalDocrootCore",
+        "description" : "By default, fetchLimit parameter is set to 25",
+        "operationId" : "getDrupalDocrootCoreDocroots",
+        "parameters" : [ {
+          "name" : "drupaldocrootCoreCode",
+          "in" : "path",
+          "description" : "DrupalDocrootCode Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DocrootHeader"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/hosting/docroots/{docrootCode}/env" : {
+      "get" : {
+        "tags" : [ "v1hostingdocroots" ],
+        "summary" : "Get all environment available for the specified docroot",
+        "description" : "",
+        "operationId" : "getAllEnvironments",
+        "parameters" : [ {
+          "name" : "docrootCode",
+          "in" : "path",
+          "description" : "Docroot code",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "The search engine",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/DocrootEnvironmentHeader"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/hosting/docroots/{docrootCode}/env/{environmentCode}/domains/{domainCode}/clear-acquia-varnish" : {
+      "post" : {
+        "tags" : [ "v1hostingdocroots" ],
+        "summary" : "Clear Acquia varnish cache of a domain on the specified docroot / environment",
+        "description" : "",
+        "operationId" : "clearAcquiaVarnish",
+        "parameters" : [ {
+          "name" : "docrootCode",
+          "in" : "path",
+          "description" : "Docroot Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "environmentCode",
+          "in" : "path",
+          "description" : "Environment Id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Domain"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/hosting/domains" : {
+      "get" : {
+        "tags" : [ "v1hostingdomains" ],
+        "summary" : "Get all Domains",
+        "description" : "",
+        "operationId" : "getDomains",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "The domain name",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "qualysEnabled",
+          "in" : "query",
+          "description" : "The qualys enabled flag",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "waf",
+          "in" : "query",
+          "description" : "The waf flag",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "The search engine",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Domain"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/hosting/domains/isadmin/{domainCode}" : {
+      "get" : {
+        "tags" : [ "v1hostingdomains" ],
+        "summary" : "Check user access right for specific domain",
+        "description" : "",
+        "operationId" : "isAdmin",
+        "parameters" : [ {
+          "name" : "domainCode",
+          "in" : "path",
+          "description" : "Domain Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "boolean"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/projects/{projectType}/{projectCode}/users" : {
+      "get" : {
+        "tags" : [ "v1projects" ],
+        "summary" : "Get all users",
+        "description" : "",
+        "operationId" : "getAllUsers",
+        "parameters" : [ {
+          "name" : "projectType",
+          "in" : "path",
+          "description" : "Project type",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "projectCode",
+          "in" : "path",
+          "description" : "Project code",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "Search filter",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PageUserBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/repository/{repositoryId}" : {
+      "get" : {
+        "tags" : [ "v1repository" ],
+        "summary" : "Get repository by repositoryId",
+        "description" : "",
+        "operationId" : "getRepository",
+        "parameters" : [ {
+          "name" : "repositoryId",
+          "in" : "path",
+          "description" : "repository id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/request" : {
+      "post" : {
+        "tags" : [ "v1request" ],
+        "summary" : "Send a deployment request",
+        "description" : "",
+        "operationId" : "sendDeploymentRequest",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/Deployment"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/users/profile/{email}" : {
+      "put" : {
+        "tags" : [ "v1users" ],
+        "summary" : "Update the user profile",
+        "description" : "",
+        "operationId" : "updateProfile",
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "path",
+          "description" : "Email",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "User Body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserBody"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully updated",
+            "schema" : {
+              "$ref" : "#/definitions/UserBody"
+            }
+          },
+          "400" : {
+            "description" : "The body is empty"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/users/{email}" : {
+      "get" : {
+        "tags" : [ "v1users" ],
+        "summary" : "Get user",
+        "description" : "",
+        "operationId" : "getUser",
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "path",
+          "description" : "email",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/UserBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/users/{email}/authentication/password" : {
+      "put" : {
+        "tags" : [ "v1users" ],
+        "summary" : "Update password",
+        "description" : "",
+        "operationId" : "updatePassword",
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "path",
+          "description" : "Email",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "User Body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LDAPCredential"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully updated",
+            "schema" : {
+              "$ref" : "#/definitions/LDAPCredential"
+            }
+          },
+          "400" : {
+            "description" : "The body is empty"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/users/{email}/projects" : {
+      "get" : {
+        "tags" : [ "v1users" ],
+        "summary" : "Get all users projects",
+        "description" : "",
+        "operationId" : "getAllUsersProjects",
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "path",
+          "description" : "email",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "Search filter",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/ProjectBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/websites" : {
+      "get" : {
+        "tags" : [ "v1websites" ],
+        "summary" : "Get all websites",
+        "description" : "",
+        "operationId" : "getAllWebsites",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "The name of website",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "qualysEnabled",
+          "in" : "query",
+          "description" : "The qualys enabled flag",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "The search engine",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showEnable",
+          "in" : "query",
+          "description" : "Show enable Website",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/WebsiteDetailBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/websites/{websiteCode}" : {
+      "get" : {
+        "tags" : [ "v1websites" ],
+        "summary" : "Get website by code",
+        "description" : "",
+        "operationId" : "getWebsite",
+        "parameters" : [ {
+          "name" : "websiteCode",
+          "in" : "path",
+          "description" : "Website code",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/WebsiteDetailBody"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/websites/{websiteCode}/docroots" : {
+      "get" : {
+        "tags" : [ "v1websites" ],
+        "summary" : "Get website docroots",
+        "description" : "",
+        "operationId" : "getWebsiteDocroots",
+        "parameters" : [ {
+          "name" : "websiteCode",
+          "in" : "path",
+          "description" : "Website code",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "environments",
+          "in" : "query",
+          "description" : "The environments flag for getting deployments",
+          "required" : false,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DocrootHeader"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/v1/websites/{websiteCode}/domains" : {
+      "get" : {
+        "tags" : [ "v1websites" ],
+        "summary" : "Get website domains",
+        "description" : "",
+        "operationId" : "getWebsiteDomains",
+        "parameters" : [ {
+          "name" : "websiteCode",
+          "in" : "path",
+          "description" : "Website code",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "waf",
+          "in" : "query",
+          "description" : "The waf flag",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "tree",
+          "in" : "query",
+          "description" : "The tree flag",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "docrootCode",
+          "in" : "query",
+          "description" : "Docroot Id",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "environmentCode",
+          "in" : "query",
+          "description" : "Environment Id",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Domain"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    }
+  },
+  "definitions" : {
+    "AccessRightBody" : {
+      "type" : "object",
+      "required" : [ "projectCode", "projectType", "roleLabel", "userMail" ],
+      "properties" : {
+        "accessRightId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "userMail" : {
+          "type" : "string"
+        },
+        "roleLabel" : {
+          "type" : "string"
+        },
+        "projectCode" : {
+          "type" : "string"
+        },
+        "projectType" : {
+          "type" : "string",
+          "description" : "Project Type",
+          "enum" : [ "ddc", "w" ]
+        },
+        "projectName" : {
+          "type" : "string"
+        }
+      },
+      "description" : "AccessRightBody Object"
+    },
+    "Command" : {
+      "type" : "object",
+      "properties" : {
+        "command" : {
+          "type" : "string"
+        },
+        "order" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "param" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Command Object"
+    },
+    "Deployment" : {
+      "type" : "object",
+      "properties" : {
+        "deploymentId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "docrootCode" : {
+          "type" : "string"
+        },
+        "environmentCode" : {
+          "type" : "string"
+        },
+        "deliverableCode" : {
+          "type" : "string"
+        },
+        "deliverableVersion" : {
+          "type" : "string"
+        },
+        "requester" : {
+          "type" : "string"
+        },
+        "rundeckJobId" : {
+          "type" : "string"
+        },
+        "deploymentStatus" : {
+          "$ref" : "#/definitions/DeploymentStatus"
+        },
+        "deploymentType" : {
+          "$ref" : "#/definitions/DeploymentType"
+        },
+        "creationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "description" : "Deployment Object"
+    },
+    "DeploymentStatus" : {
+      "type" : "object",
+      "required" : [ "deploymentStatusId" ],
+      "properties" : {
+        "deploymentStatusId" : {
+          "type" : "string"
+        },
+        "label" : {
+          "type" : "string"
+        }
+      },
+      "description" : "DeploymentStatus Object"
+    },
+    "DeploymentType" : {
+      "type" : "object",
+      "properties" : {
+        "deploymentTypeId" : {
+          "type" : "string"
+        },
+        "label" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DocrootBody" : {
+      "allOf" : [ {
+        "$ref" : "#/definitions/DocrootHeader"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "environments" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/WebsiteDeployedBody"
+            }
+          }
+        },
+        "description" : "DocrootBody Object"
+      } ]
+    },
+    "DocrootEnvironmentHeader" : {
+      "type" : "object",
+      "properties" : {
+        "environmentCode" : {
+          "type" : "string"
+        }
+      },
+      "description" : "DocrootEnvironmentHeader Object"
+    },
+    "DocrootHeader" : {
+      "type" : "object",
+      "required" : [ "code", "hostingProviderCode" ],
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "providerInternalId" : {
+          "type" : "string"
+        },
+        "hostingProviderCode" : {
+          "type" : "string"
+        },
+        "hostingProviderName" : {
+          "type" : "string"
+        }
+      },
+      "description" : "DocrootHeader Object"
+    },
+    "Domain" : {
+      "type" : "object",
+      "required" : [ "docrootCode", "domainType", "environmentCode", "name", "websiteCode" ],
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "domainType" : {
+          "type" : "string"
+        },
+        "parent" : {
+          "$ref" : "#/definitions/DomainHeader"
+        },
+        "children" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Domain"
+          }
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "websiteCode" : {
+          "type" : "string"
+        },
+        "docrootCode" : {
+          "type" : "string"
+        },
+        "environmentCode" : {
+          "type" : "string"
+        },
+        "httpsEnable" : {
+          "type" : "boolean"
+        },
+        "isQualysEnable" : {
+          "type" : "boolean"
+        },
+        "isMonitorEnable" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "Domain Object"
+    },
+    "DomainHeader" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "domainType" : {
+          "type" : "string"
+        },
+        "httpsEnable" : {
+          "type" : "boolean"
+        },
+        "parent" : {
+          "$ref" : "#/definitions/DomainHeader"
+        }
+      },
+      "description" : "DomainHeader Object"
+    },
+    "DrupalDocrootCoreBody" : {
+      "type" : "object",
+      "required" : [ "code", "codeRepositoryUrl", "name" ],
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "codeRepositoryUrl" : {
+          "type" : "string"
+        }
+      },
+      "description" : "DrupalDocrootCoreBody Object"
+    },
+    "DrupalDocrootCoreHeader" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "DrupalDocrootCoreHeader Object"
+    },
+    "IncapsulaResponse" : {
+      "type" : "object",
+      "properties" : {
+        "res" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "res_message" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "ips" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Dn"
+          }
+        },
+        "original_dns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF OriginalDn"
+          }
+        },
+        "warnings" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Warning"
+          }
+        },
+        "security" : {
+          "$ref" : "#/definitions/WAF Security"
+        },
+        "active" : {
+          "type" : "string"
+        },
+        "acceleration_level" : {
+          "type" : "string"
+        },
+        "site_creation_date" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "sealLocation" : {
+          "$ref" : "#/definitions/WAF SealLocation"
+        },
+        "ssl" : {
+          "$ref" : "#/definitions/WAF Ssl"
+        },
+        "login_protect" : {
+          "$ref" : "#/definitions/WAF LoginProtect"
+        },
+        "performance_configuration" : {
+          "$ref" : "#/definitions/WAF PerformanceConfiguration"
+        },
+        "visits_timeseries" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF VisitsTimeseries"
+          }
+        },
+        "requests_geo_dist_summary" : {
+          "$ref" : "#/definitions/WAF RequestsGeoDistSummary"
+        },
+        "caching" : {
+          "$ref" : "#/definitions/WAF Caching"
+        },
+        "caching_timeseries" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF CachingTimeseries"
+          }
+        },
+        "hits_timeseries" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF HitsTimeseries"
+          }
+        },
+        "threats" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Threat"
+          }
+        },
+        "visits_dist_summary" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF VisitsDistSummary"
+          }
+        },
+        "bandwidth_timeseries" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF BandwidthTimeseries"
+          }
+        },
+        "visits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Visit"
+          }
+        }
+      },
+      "description" : "IncapsulaResponse Object"
+    },
+    "LDAPCredential" : {
+      "type" : "object",
+      "required" : [ "newPassword", "oldPassword" ],
+      "properties" : {
+        "oldPassword" : {
+          "type" : "string"
+        },
+        "newPassword" : {
+          "type" : "string"
+        }
+      },
+      "description" : "LDAPCredential Object"
+    },
+    "Page" : {
+      "type" : "object",
+      "properties" : {
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "sort" : {
+          "$ref" : "#/definitions/Sort"
+        },
+        "size" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "content" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "number" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "first" : {
+          "type" : "boolean"
+        },
+        "numberOfElements" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "last" : {
+          "type" : "boolean"
+        },
+        "pageable" : {
+          "$ref" : "#/definitions/Pageable"
+        },
+        "empty" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PageUserBody" : {
+      "type" : "object",
+      "properties" : {
+        "totalElements" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "sort" : {
+          "$ref" : "#/definitions/Sort"
+        },
+        "size" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "content" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UserBody"
+          }
+        },
+        "number" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "first" : {
+          "type" : "boolean"
+        },
+        "numberOfElements" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "last" : {
+          "type" : "boolean"
+        },
+        "pageable" : {
+          "$ref" : "#/definitions/Pageable"
+        },
+        "empty" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "Pageable" : {
+      "type" : "object",
+      "properties" : {
+        "sort" : {
+          "$ref" : "#/definitions/Sort"
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "paged" : {
+          "type" : "boolean"
+        },
+        "unpaged" : {
+          "type" : "boolean"
+        },
+        "pageNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "ProjectBody" : {
+      "type" : "object",
+      "properties" : {
+        "projectId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "drupaldocrootcore" : {
+          "$ref" : "#/definitions/DrupalDocrootCoreBody"
+        },
+        "website" : {
+          "$ref" : "#/definitions/WebsiteBody"
+        },
+        "projectType" : {
+          "type" : "string"
+        },
+        "projectCode" : {
+          "type" : "string"
+        },
+        "projectName" : {
+          "type" : "string"
+        }
+      },
+      "description" : "ProjectBody Object"
+    },
+    "Request" : {
+      "type" : "object",
+      "required" : [ "deliverableCode", "deploymentTypeId", "docrootCode", "environmentCode" ],
+      "properties" : {
+        "deploymentTypeId" : {
+          "type" : "string",
+          "description" : "Deployment Type",
+          "enum" : [ "D_DOCROOTCORE", "D_WEBSITE" ]
+        },
+        "docrootCode" : {
+          "type" : "string",
+          "description" : "Docroot code"
+        },
+        "environmentCode" : {
+          "type" : "string",
+          "description" : "Environment code"
+        },
+        "deliverableCode" : {
+          "type" : "string",
+          "description" : "Project code"
+        },
+        "deliverableVersion" : {
+          "type" : "string"
+        },
+        "commands" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Command"
+          }
+        }
+      },
+      "description" : "Request Object"
+    },
+    "Sort" : {
+      "type" : "object",
+      "properties" : {
+        "sorted" : {
+          "type" : "boolean"
+        },
+        "unsorted" : {
+          "type" : "boolean"
+        },
+        "empty" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "UserBody" : {
+      "type" : "object",
+      "required" : [ "company", "firstname", "lastname" ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "firstname" : {
+          "type" : "string"
+        },
+        "lastname" : {
+          "type" : "string"
+        },
+        "company" : {
+          "type" : "string"
+        },
+        "isAdmin" : {
+          "type" : "boolean"
+        },
+        "role" : {
+          "type" : "string"
+        },
+        "isActive" : {
+          "type" : "boolean"
+        },
+        "accessrightByUsers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AccessRightBody"
+          }
+        }
+      },
+      "description" : "UserBody Object"
+    },
+    "WAF" : {
+      "type" : "object",
+      "properties" : {
+        "rules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Rules"
+          }
+        }
+      },
+      "description" : "WAF Object"
+    },
+    "WAF Acls" : {
+      "type" : "object",
+      "properties" : {
+        "rules" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Rules"
+          }
+        }
+      },
+      "description" : "WAF Acls Object"
+    },
+    "WAF AclsConfiguration" : {
+      "type" : "object",
+      "required" : [ "ruleId" ],
+      "properties" : {
+        "ruleId" : {
+          "type" : "string",
+          "enum" : [ "blacklisted_countries", "blacklisted_urls", "blacklisted_ips", "whitelisted_ips" ]
+        },
+        "urls" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "urlPatterns" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "contains", "equals", "prefix", "suffix", "not_equals", "not_contain", "not_prefix", "not_suffix" ]
+          }
+        },
+        "countries" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW" ]
+          }
+        },
+        "continents" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "AF", "NA", "OC", "AN", "AS", "EU", "SA" ]
+          }
+        },
+        "ips" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF AclsConfiguration Object"
+    },
+    "WAF Action" : {
+      "type" : "object",
+      "properties" : {
+        "requestResult" : {
+          "type" : "string"
+        },
+        "isSecured" : {
+          "type" : "boolean"
+        },
+        "url" : {
+          "type" : "string"
+        },
+        "threats" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Threat"
+          }
+        }
+      },
+      "description" : "WAF Action Object"
+    },
+    "WAF AdvancedCachingRules" : {
+      "type" : "object",
+      "properties" : {
+        "never_cache_resources" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF NeverCacheResource"
+          }
+        },
+        "always_cache_resources" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF AlwaysCacheResource"
+          }
+        }
+      },
+      "description" : "WAF AdvancedCachingRules Object"
+    },
+    "WAF AlwaysCacheResource" : {
+      "type" : "object",
+      "properties" : {
+        "pattern" : {
+          "type" : "string"
+        },
+        "url" : {
+          "type" : "string"
+        },
+        "ttl" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "ttlUnits" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF AlwaysCacheResource Object"
+    },
+    "WAF BandwidthTimeseries" : {
+      "type" : "object",
+      "properties" : {
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF BandwidthTimeseries Object"
+    },
+    "WAF CacheHeader" : {
+      "type" : "object",
+      "properties" : {
+        "headerName" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF CacheHeader Object"
+    },
+    "WAF CacheMode" : {
+      "type" : "object",
+      "required" : [ "cacheMode" ],
+      "properties" : {
+        "cacheMode" : {
+          "type" : "string",
+          "enum" : [ "disable", "static_only", "static_and_dynamic", "aggressive" ]
+        },
+        "dynamicCacheDuration" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "aggressiveCacheDuration" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "durationPeriod" : {
+          "type" : "string",
+          "enum" : [ "hr", "min", "sec", "days", "weeks" ]
+        }
+      },
+      "description" : "WAF CacheMode Object"
+    },
+    "WAF CacheRules" : {
+      "type" : "object",
+      "properties" : {
+        "cacheHeaders" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "alwaysCacheResourceUrl" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "alwaysCacheResourcePattern" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "contains", "equals", "prefix", "suffix", "not_equals", "not_contain", "not_prefix", "not_suffix" ]
+          }
+        },
+        "alwaysCacheResourceDuration" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "durationPeriod" : {
+          "type" : "string",
+          "enum" : [ "hr", "min", "sec", "days", "weeks" ]
+        },
+        "neverCacheResourceUrl" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "neverCacheResourcePattern" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "contains", "equals", "prefix", "suffix", "not_equals", "not_contain", "not_prefix", "not_suffix" ]
+          }
+        },
+        "clearAlwaysCacheRules" : {
+          "type" : "boolean"
+        },
+        "clearNeverCacheRules" : {
+          "type" : "boolean"
+        },
+        "clearCacheHeadersRules" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "WAF CacheRules Object"
+    },
+    "WAF CacheSettings" : {
+      "type" : "object",
+      "required" : [ "param", "value" ],
+      "properties" : {
+        "param" : {
+          "type" : "string",
+          "enum" : [ "async_validation", "minify_javascript", "minify_css", "minify_static_html", "compress_jpeg", "progressive_image_rendering", "aggressive_compression", "compress_png", "on_the_fly_compression", "tcp_pre_pooling", "comply_no_cache", "comply_vary", "use_shortest_caching", "prefer_last_modified", "disable_client_side_caching", "cache_300x" ]
+        },
+        "value" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "WAF CacheSettings Object"
+    },
+    "WAF Caching" : {
+      "type" : "object",
+      "properties" : {
+        "saved_requests" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "total_requests" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "saved_bytes" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "total_bytes" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "description" : "WAF Caching Object"
+    },
+    "WAF CachingTimeseries" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      },
+      "description" : "WAF CachingTimeseries Object"
+    },
+    "WAF CustomCertificate" : {
+      "type" : "object",
+      "properties" : {
+        "active" : {
+          "type" : "boolean"
+        },
+        "expirationDate" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "revocationError" : {
+          "type" : "boolean"
+        },
+        "validityError" : {
+          "type" : "boolean"
+        },
+        "chainError" : {
+          "type" : "boolean"
+        },
+        "hostnameMismatchError" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "WAF CustomCertificate Object"
+    },
+    "WAF Dn" : {
+      "type" : "object",
+      "properties" : {
+        "dns_record_name" : {
+          "type" : "string"
+        },
+        "set_type_to" : {
+          "type" : "string"
+        },
+        "set_data_to" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF Dn Object"
+    },
+    "WAF Exception" : {
+      "type" : "object",
+      "properties" : {
+        "values" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Value"
+          }
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "description" : "WAF Exception Object"
+    },
+    "WAF GeneratedCertificate" : {
+      "type" : "object",
+      "properties" : {
+        "ca" : {
+          "type" : "string"
+        },
+        "validation_method" : {
+          "type" : "string"
+        },
+        "validation_data" : {
+          "type" : "string"
+        },
+        "san" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "validation_status" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF GeneratedCertificate Object"
+    },
+    "WAF Geo" : {
+      "type" : "object",
+      "properties" : {
+        "continents" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "AF", "NA", "OC", "AN", "AS", "EU", "SA" ]
+          }
+        },
+        "countries" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW" ]
+          }
+        }
+      },
+      "description" : "WAF Geo Object"
+    },
+    "WAF HitsTimeseries" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      },
+      "description" : "WAF HitsTimeseries Object"
+    },
+    "WAF LoginProtect" : {
+      "type" : "object",
+      "properties" : {
+        "enabled" : {
+          "type" : "boolean"
+        },
+        "specific_users_list" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF SpecificUsersList"
+          }
+        },
+        "send_lp_notifications" : {
+          "type" : "boolean"
+        },
+        "allow_all_users" : {
+          "type" : "boolean"
+        },
+        "authentication_methods" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "urls" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "url_patterns" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF LoginProtect Object"
+    },
+    "WAF NeverCacheResource" : {
+      "type" : "object",
+      "properties" : {
+        "pattern" : {
+          "type" : "string"
+        },
+        "url" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF NeverCacheResource Object"
+    },
+    "WAF OriginServer" : {
+      "type" : "object",
+      "properties" : {
+        "detected" : {
+          "type" : "boolean"
+        },
+        "detectionStatus" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF OriginServer Object"
+    },
+    "WAF OriginalDn" : {
+      "type" : "object",
+      "properties" : {
+        "dns_record_name" : {
+          "type" : "string"
+        },
+        "set_type_to" : {
+          "type" : "string"
+        },
+        "set_data_to" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF OriginalDn Object"
+    },
+    "WAF PerformanceConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "advanced_caching_rules" : {
+          "$ref" : "#/definitions/WAF AdvancedCachingRules"
+        },
+        "acceleration_level" : {
+          "type" : "string"
+        },
+        "async_validation" : {
+          "type" : "boolean"
+        },
+        "minify_javascript" : {
+          "type" : "boolean"
+        },
+        "minify_css" : {
+          "type" : "boolean"
+        },
+        "minify_static_html" : {
+          "type" : "boolean"
+        },
+        "compress_jpeg" : {
+          "type" : "boolean"
+        },
+        "progressive_image_rendering" : {
+          "type" : "boolean"
+        },
+        "aggressive_compression" : {
+          "type" : "boolean"
+        },
+        "compress_png" : {
+          "type" : "boolean"
+        },
+        "on_the_fly_compression" : {
+          "type" : "boolean"
+        },
+        "tcp_pre_pooling" : {
+          "type" : "boolean"
+        },
+        "comply_no_cache" : {
+          "type" : "boolean"
+        },
+        "comply_vary" : {
+          "type" : "boolean"
+        },
+        "use_shortest_caching" : {
+          "type" : "boolean"
+        },
+        "support_all_tls_versions" : {
+          "type" : "boolean"
+        },
+        "prefer_last_modified" : {
+          "type" : "boolean"
+        },
+        "disable_client_side_caching" : {
+          "type" : "boolean"
+        },
+        "cache_headers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF CacheHeader"
+          }
+        }
+      },
+      "description" : "WAF PerformanceConfiguration Object"
+    },
+    "WAF RequestsGeoDistSummary" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "description" : "WAF RequestsGeoDistSummary Object"
+    },
+    "WAF Rules" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "block_bad_bots" : {
+          "type" : "boolean"
+        },
+        "challenge_suspected_bots" : {
+          "type" : "boolean"
+        },
+        "action" : {
+          "type" : "string"
+        },
+        "action_text" : {
+          "type" : "string"
+        },
+        "exceptions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Exception"
+          }
+        },
+        "activation_mode" : {
+          "type" : "string"
+        },
+        "activation_mode_text" : {
+          "type" : "string"
+        },
+        "ddos_traffic_threshold" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "ddos_traffic_threshold_text" : {
+          "type" : "string"
+        },
+        "geo" : {
+          "$ref" : "#/definitions/WAF Geo"
+        },
+        "urls" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Url"
+          }
+        },
+        "ips" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF Rules Object"
+    },
+    "WAF SealLocation" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF SealLocation Object"
+    },
+    "WAF Security" : {
+      "type" : "object",
+      "properties" : {
+        "waf" : {
+          "$ref" : "#/definitions/WAF"
+        },
+        "acls" : {
+          "$ref" : "#/definitions/WAF Acls"
+        }
+      },
+      "description" : "WAF Security Object"
+    },
+    "WAF SecuritySummary" : {
+      "type" : "object",
+      "properties" : {
+        "api.threats.sql_injection" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.cross_site_scripting" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.illegal_resource_access" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.remote_file_inclusion" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.customRule" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.ddos" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.backdoor" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.threats.bot_access_control" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.acl.blacklisted_countries" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.acl.blacklisted_urls" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "api.acl.blacklisted_ips" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "description" : "WAF SecuritySummary Object"
+    },
+    "WAF Site" : {
+      "type" : "object",
+      "properties" : {
+        "domain" : {
+          "type" : "string"
+        },
+        "siteIp" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "removeSsl" : {
+          "type" : "boolean"
+        },
+        "tests" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "domain_validation", "services", "dns" ]
+          }
+        }
+      },
+      "description" : "WAF Site Object"
+    },
+    "WAF SpecificUsersList" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF SpecificUsersList Object"
+    },
+    "WAF Ssl" : {
+      "type" : "object",
+      "properties" : {
+        "origin_server" : {
+          "$ref" : "#/definitions/WAF OriginServer"
+        },
+        "generated_certificate" : {
+          "$ref" : "#/definitions/WAF GeneratedCertificate"
+        },
+        "custom_certificate" : {
+          "$ref" : "#/definitions/WAF CustomCertificate"
+        }
+      },
+      "description" : "WAF Ssl Object"
+    },
+    "WAF Threat" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "incidents" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "status_text_id" : {
+          "type" : "string"
+        },
+        "status_text" : {
+          "type" : "string"
+        },
+        "followup" : {
+          "type" : "string"
+        },
+        "followup_text" : {
+          "type" : "string"
+        },
+        "followup_url" : {
+          "type" : "string"
+        },
+        "securityRule" : {
+          "type" : "string"
+        },
+        "alertLocation" : {
+          "type" : "string"
+        },
+        "attackCodes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "securityRuleAction" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF Threat Object"
+    },
+    "WAF ThreatsConfiguration" : {
+      "type" : "object",
+      "required" : [ "ruleId" ],
+      "properties" : {
+        "ruleId" : {
+          "type" : "string",
+          "enum" : [ "bot_access_control", "sql_injection", "cross_site_scripting", "illegal_resource_access", "backdoor", "ddos", "remote_file_inclusion" ]
+        },
+        "securityRuleAction" : {
+          "type" : "string",
+          "enum" : [ "disabled", "alert", "block_request", "block_user", "block_ip", "quarantine_url" ]
+        },
+        "blockBadBots" : {
+          "type" : "boolean"
+        },
+        "challengeSuspectedBots" : {
+          "type" : "boolean"
+        },
+        "activationMode" : {
+          "type" : "string",
+          "enum" : [ "off", "auto", "on" ]
+        },
+        "ddosTrafficThreshold" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "quarantinedUrls" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "WAF ThreatsConfiguration Object"
+    },
+    "WAF Url" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "string"
+        },
+        "pattern" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF Url Object"
+    },
+    "WAF Value" : {
+      "type" : "object",
+      "properties" : {
+        "urls" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Url"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF Value Object"
+    },
+    "WAF Visit" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "siteId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "startTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "clientIPs" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "country" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "countryCode" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "clientType" : {
+          "type" : "string"
+        },
+        "clientApplication" : {
+          "type" : "string"
+        },
+        "clientApplicationVersion" : {
+          "type" : "string"
+        },
+        "httpVersion" : {
+          "type" : "string"
+        },
+        "userAgent" : {
+          "type" : "string"
+        },
+        "os" : {
+          "type" : "string"
+        },
+        "osVersion" : {
+          "type" : "string"
+        },
+        "supportsCookies" : {
+          "type" : "boolean"
+        },
+        "supportsJavaScript" : {
+          "type" : "boolean"
+        },
+        "hits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "pageViews" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "entryReferer" : {
+          "type" : "string"
+        },
+        "entryPage" : {
+          "type" : "string"
+        },
+        "servedVia" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "securitySummary" : {
+          "$ref" : "#/definitions/WAF SecuritySummary"
+        },
+        "actions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/WAF Action"
+          }
+        }
+      },
+      "description" : "WAF Visit Object"
+    },
+    "WAF VisitsDistSummary" : {
+      "type" : "object",
+      "properties" : {
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF VisitsDistSummary Object"
+    },
+    "WAF VisitsTimeseries" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      },
+      "description" : "WAF VisitsTimeseries Object"
+    },
+    "WAF Warning" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "dns_record_name" : {
+          "type" : "string"
+        },
+        "set_type_to" : {
+          "type" : "string"
+        },
+        "set_data_to" : {
+          "type" : "string"
+        },
+        "mail_record_name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "WAF Warning Object"
+    },
+    "WebsiteBody" : {
+      "type" : "object",
+      "required" : [ "code", "codeRepositoryUrl", "homeDirectory", "name" ],
+      "properties" : {
+        "websiteId" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "codeRepositoryUrl" : {
+          "type" : "string"
+        },
+        "homeDirectory" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "enable" : {
+          "type" : "boolean"
+        },
+        "created" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "lastUpdate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "isLive" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "WebsiteBody Object"
+    },
+    "WebsiteDeployedBody" : {
+      "type" : "object",
+      "properties" : {
+        "environmentCode" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "websiteVersion" : {
+          "type" : "string"
+        },
+        "cmsVersion" : {
+          "type" : "string"
+        },
+        "cmsCode" : {
+          "type" : "string"
+        },
+        "cmsName" : {
+          "type" : "string"
+        },
+        "domains" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DomainHeader"
+          }
+        }
+      },
+      "description" : "WebsiteDeployedBody Object"
+    },
+    "WebsiteDetailBody" : {
+      "type" : "object",
+      "required" : [ "code", "codeRepositoryUrl", "homeDirectory", "name" ],
+      "properties" : {
+        "codeRepositoryUrl" : {
+          "type" : "string"
+        },
+        "homeDirectory" : {
+          "type" : "string"
+        },
+        "enable" : {
+          "type" : "boolean"
+        },
+        "created" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "lastUpdate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "code" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "isLive" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "WebsiteDetailBody Object"
+    }
+  }
+}

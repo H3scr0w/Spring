@@ -1,0 +1,34 @@
+<document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
+  outputName="maven-pdf-plugin">
+ 
+  <meta>
+    <title>Website4SG Core Documentation</title>
+    <author>Jean-Baptiste Fournier</author>
+  </meta>
+ 
+  <toc name="Table of Contents">
+    <item name="overview" ref="overview.md"/>
+    <item name="Architecture" ref="architecture.md"/>
+    <item name="Authentication" ref="authentication.md"/>
+    <item name="JWT Format" ref="jwt.md"/>
+    <item name="Profiles and roles" ref="profilesroles.xhtml"/>
+    <item name="Deployment workflow" ref="deploymentworkflow.md"/>
+    <item name="Business Rules" ref="businessrules.md"/>
+    <item name="Persistence layer" ref="persistencelayer.md"/>
+    <item name="Persistence layer Design Rules" ref="persistencelayerrules.md"/>
+    <item name="Roles and Endpoints Matrix" ref="rolesperendpoints.md"/>
+    <item name="API Design Rules" ref="apirules.md"/>
+    <item name="Rest API Documentation" ref="restapi.xhtml"/>
+  </toc>
+ 
+  <cover>
+    <coverTitle>${project.name}</coverTitle>
+    <coverSubTitle>v. ${project.version}</coverSubTitle>
+    <coverType>Documentation</coverType>
+    <projectName>${project.name}</projectName>
+    <companyName>Saint-Gobain</companyName>
+    <companyLogo>https://upload.wikimedia.org/wikipedia/fr/thumb/e/e3/Logo_Saint-Gobain.png/280px-Logo_Saint-Gobain.png</companyLogo>
+  </cover>
+</document>

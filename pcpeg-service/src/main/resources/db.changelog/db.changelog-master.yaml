@@ -1,0 +1,19 @@
+databaseChangeLog:
+
+# File name convension : S{SPRINT-NUMBER}-{CUSTOM-NAME}.yaml
+# CUSTOM-NAME reflects what table or US you are working on
+
+# initial database structrue, not needed for uat & prod
+#  - include:
+#      file: scripts/S2/V1-INIT-SCHEMA.yaml
+#      relativeToChangelogFile: true
+
+  - include:
+      file: scripts/S1/V1-PEG-32-COMPANIES.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: scripts/S2/V2-PEG-25-CAMPAIGNS.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: scripts/S3/V3-PEG-13-SETTINGS.yaml
+      relativeToChangelogFile: true  

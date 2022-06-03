@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: pcpeg
+  cloud:
+    config:
+      enabled: false
+---
+spring:
+  profiles: uat,prod
+  cloud:
+    config:
+      enabled: true
+      uri: https://config.digital-solutions.saint-gobain.com
+      username: ${CONFIG_USERNAME}
+      password: ${CONFIG_PASSWORD}
+health:
+  config:
+    time-to-live: 86400000

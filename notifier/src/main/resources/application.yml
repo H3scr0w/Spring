@@ -1,0 +1,121 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+  application:
+    name: notifier
+  mvc:
+    async:
+      request-timeout: 180000
+  cloud:
+    client:
+      hostname: ${info.service.host}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  boot:
+    admin:
+      client:
+        auto-deregistration: true
+        instance:
+          prefer-ip: true
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      graphite:
+        enabled: true
+        host: localhost
+        port: 2003
+
+
+server:
+  https:
+    ssl:
+      key-store: ${key-store:classpath:keystore.pkcs12}
+      key-store-password: ${KEYPASS:changeit}
+      key-store-type: PKCS12
+      key-alias: ${key-alias:tomcat}
+      enabled-protocols: TLSv1.2
+      port: ${HTTPS-PORT:8098}
+      max-https-header-size: 20480
+      max-connections: 10000
+  port: ${HTTP-PORT:8097}
+  max-http-header-size: 20KB
+  tomcat:
+    max-connections: 10000
+
+info:
+  service:
+    name: ${spring.application.name}
+    host: ${spring.application.name}
+    port: ${server.port}
+
+swagger:
+  title: "@project.artifactId@ service layer"
+  description: NotifierApplication API documentation
+  version: "@project.version@"
+  terms-of-service-url:
+  contact-name: Saint-Gobain
+  contact-url: www.saint-gobain.fr
+  contact-email: info@sgbdf.fr
+  license: Proprietary
+  license-url: www.saint-gobain.fr/license
+
+# ===================================================================
+# SGDBF specific properties
+# ===================================================================
+
+sgdbf:
+  aop:
+    logging:
+      enabled: true
+      full-stacktrace: true
+  kern:
+    elasticsearch:
+      enabled: false
+      https: false
+      host: localhost
+      port: 9200
+      user: test
+      pass: test
+      application: atlas-${spring.application.name}
+      maxQueueSize: 26214400
+      maxMessageSize: 26214400
+  cache:
+    hazelcast:
+      port: 5701
+      port-count: 5
+      members: 'tasks.notifier,'
+      cluster-name: notifier
+
+sgdbf-security:
+  jwt:
+    request-param-token: true
+
+scheduled-tasks:
+  web-socket-thirty-minutes-connections:
+    cron: 0 0/30 * * * *
+  web-socket-two-minutes-connections:
+    cron: 0 0/2 * * * *
+  web-socket-connections-stats:
+    cron: 0 15 0 * * *
+  check-hazelcast-instance:
+    cron: 0 0/2 * * * *
+

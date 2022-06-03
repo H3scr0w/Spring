@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.sgdbf.starter</groupId>
+		<artifactId>sgdbf-starter-parent</artifactId>
+		<version>4.1.38</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.sgdbf.service</groupId>
+	<artifactId>notifier</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>[SGDBF] Notifier</name>
+	<description>Description of the microservice project</description>
+
+    <scm>
+        <connection>scm:git:git@git.ci.pointp.saint-gobain.net:atlas-service/notifier.git</connection>
+        <developerConnection>scm:git:git@git.ci.pointp.saint-gobain.net:atlas-service/notifier.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://git.ci.pointp.saint-gobain.net/atlas-service/notifier.git</url>
+    </scm>
+
+	<properties>
+		<sgdbf-starter.version>${project.parent.version}</sgdbf-starter.version>
+		<!-- SWAGGER -->
+		<swagger.web.rest.location>com.sgdbf.service.notifier.web.rest</swagger.web.rest.location>
+
+		<!-- Sonar properties -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.testresult.directory}/coverage/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.sources>${project.basedir}/src/main/</sonar.sources>
+        <sonar.tests>${project.basedir}/src/test/</sonar.tests>
+        <sonar.exclusions>
+        **/NotifierApplication.java, **/Message.java
+        </sonar.exclusions>
+	</properties>
+
+	<dependencies>
+
+		<!-- spring boot admin-->
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+
+		<!--sgdbf starters-->
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-commons</artifactId>
+			<version>${sgdbf-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-gateway</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-logger</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-aop</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-swagger</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-jwt</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-threading</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sgdbf.starter</groupId>
+			<artifactId>sgdbf-starter-hazelcast</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+
+		<!-- external dependencies-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-messaging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--Tests-->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!--
+                SPRING BOOT
+            -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+                JAVADOC
+            -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+                GENERATE SWAGGER
+            -->
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+                VALIDATE SWAGGER
+            -->
+			<plugin>
+				<groupId>com.github.sylvainlaurent.maven</groupId>
+				<artifactId>swagger-validator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>validate swagger</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+                SWAGGER : REPLACE HOST
+            -->
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<executions>
+					<execution>
+						<id>replace-host-token</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+                ATTACH ADDITIONAL ARTIFACTS
+            -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-additional-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

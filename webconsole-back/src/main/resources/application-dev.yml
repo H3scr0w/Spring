@@ -1,0 +1,81 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+server:
+  port: 8081
+  ssl:
+    enabled: false
+spring:
+  profiles:
+    active: dev
+  jackson:
+    serialization:
+      indent-output: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        web-allow-others: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/website4sg?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.generate_statistics: true
+#      Generate SQL Schema
+#      hibernate.hbm2ddl.delimiter: ;
+#      javax.persistence.schema-generation.scripts.action: create
+#      javax.persistence.schema-generation.scripts.create-target: ./sql/create2.sql
+  boot:
+    admin:
+      client:
+        enabled: false
+
+saint:
+  gobain:
+    api:
+      rundeck:
+        url: http://10.154.76.161:4440/api/18
+        token: EDxBNmSpNha7y0iZ0YNgySzTMp3pkgIE
+      deployment:
+        url: https://10.0.75.1:8081/v1/deployment
+      nexus:
+        url: https://uat-nexus.website4sg.saint-gobain.com/service/rest/v1/script
+        basic-header: Basic YWRtaW46Y0ZCOUs1cENKVmRycDZXSWFrZ0s=
+      open-dj:
+        path: https://localhost:8080/api/
+        basic-header: Basic d3NpcC1hZG1pbkBzYWludC1nb2JhaW4uY29tOkNoYW5nZU1lLDEyMw==
+      qualys:
+        username: santg-ef
+        password: Azsx56Hnjm
+      incapsula:
+        api-id: 28593
+        api-key: 38cddf6d-889d-48ee-8f13-bcab92eca07f
+      acquia:
+        api-key: 6b4615df-598c-4034-a894-9cc661b35397
+        api-secret: Gse8YZLwDVRRIckqQnujWUUX3YJhuJijIu8oz+RrDf0=
+    security:
+      wsip:
+        jwt-public-key: 'C:\etc\cas\config\public.key'
+        exposure:
+          exclude:
+            - /v1/**
+            - /tools/**

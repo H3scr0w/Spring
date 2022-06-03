@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <include resource="com/sgdbf/boot/logging/logback/sgdbf-base.xml"/>
+    <jmxConfigurator/>
+
+    <!-- 	to enable logging to elasticsearch the following configuration should be mentioned in bootstrap.yml :
+    sgdbf:
+      kern:
+        elasticsearch:
+          enabled: true
+          host: localhost
+          port: 9200
+    -->
+
+    <logger name="sun.rmi" level="INFO"/>
+    <logger name="com.netflix" level="WARN"/>
+    <logger name="com.sgdbf.service.notifier" level="INFO"/>
+
+</configuration>

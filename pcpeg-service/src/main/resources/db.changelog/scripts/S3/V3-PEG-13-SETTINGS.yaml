@@ -1,0 +1,74 @@
+databaseChangeLog:
+  # Add new sequence
+  - changeSet:
+      id: createSequence-accords
+      author: R1304520
+      changes:
+        - createSequence:
+            incrementBy: 1
+            maxValue: 1000000000
+            minValue: 1
+            ordered: true
+            sequenceName: S_1_PE_PAR_ACCORDS
+            startValue: 1000
+            cache: 20
+  - changeSet:
+      id: createSequence-funds
+      author: R1304520
+      changes:
+        - createSequence:
+            incrementBy: 1
+            maxValue: 1000000000
+            minValue: 1
+            ordered: true
+            sequenceName: S_1_PE_DIM_FONDS
+            startValue: 100
+            cache: 20
+  - changeSet:
+      id: createSequence-versements
+      author: R1304520
+      changes:
+        - createSequence:
+            incrementBy: 1
+            maxValue: 1000000000
+            minValue: 1
+            ordered: true
+            sequenceName: S_1_PE_PAR_VERSEMENT
+            startValue: 6000
+            cache: 20
+  - changeSet:
+      id: createSequence-habilitations
+      author: R1304520
+      changes:
+        - createSequence:
+            incrementBy: 1
+            maxValue: 1000000000
+            minValue: 1
+            ordered: true
+            sequenceName: S_1_PE_PAR_HABILITATIONS
+            startValue: 5000
+            cache: 20
+  - changeSet:
+      id: createSequence-contacts
+      author: R1304520
+      changes:
+        - createSequence:
+            incrementBy: 1
+            maxValue: 1000000000
+            minValue: 1
+            ordered: true
+            sequenceName: S_1_PE_DIM_CONTACT_FONDS
+            startValue: 40
+            cache: 20
+  # Add new column
+  - changeSet:
+      id: addColumn-category
+      author: R1304520
+      changes:
+        - addColumn:
+            tableName: PE_PAR_HABILITATIONS
+            columns:
+              - column:
+                  name: CATEGORY
+                  type: varchar(255)
+            

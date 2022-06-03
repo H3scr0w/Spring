@@ -1,0 +1,8 @@
+{
+  "@class" : "org.apereo.cas.support.saml.services.SamlRegisteredService",
+  "serviceId" : "https://samltest.id/saml/sp",
+  "name" : "SAMLtest",
+  "id" : 4,
+  "metadataLocation" : "https://samltest.id/saml/sp",
+  "signAssertions": true
+}

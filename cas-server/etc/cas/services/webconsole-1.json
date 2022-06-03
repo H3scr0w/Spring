@@ -1,0 +1,39 @@
+{
+	"@class": "org.apereo.cas.services.RegexRegisteredService",
+	"serviceId": "^(https|http)://(localhost.*|(((uat.website4sg.saint-gobain|website4sg.saint-gobain)|((uat-admin|admin).website4sg.saint-gobain)).(com|io)))$",
+	"name": "webconsole",
+	"id": 1,
+	"accessStrategy": {
+		"@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+		"enabled": true,
+		"ssoEnabled": true,
+		"requireAllAttributes": false,
+		"rejectedAttributes" : {
+		  "@class" : "java.util.HashMap",
+		  "user_isactive" : [ "java.util.HashSet", [ false ] ]
+		}
+	},
+	"properties": {
+		"@class": "java.util.HashMap",
+		"jwtAsServiceTicket": {
+			"@class": "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+			"values": ["java.util.HashSet", ["true"]]
+		}
+	},
+	"attributeReleasePolicy": {
+		"@class": "org.apereo.cas.services.ChainingAttributeReleasePolicy",
+		"policies": ["java.util.ArrayList", [{
+				"@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
+				"allowedAttributes": {
+					"@class": "java.util.TreeMap",
+					"isMemberOf": "groups",
+					"user_isactive": "isActive"
+				}
+			},
+			{
+				"@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+				"allowedAttributes": ["java.util.ArrayList", ["groups", "accessRights", "isActive"]]
+			}
+		]]
+	}
+}

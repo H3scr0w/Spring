@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello WebSocket</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script src="./app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+  enabled. Please enable
+  Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form">
+        <div class="form-group">
+          <label for="connect">WebSocket connection:</label>
+          <button id="connect" class="btn btn-default" type="submit">Connect</button>
+        </div>
+		<div class="form-group">
+          <input type="text" id="url" class="form-control" placeholder="the url here..." 
+		  value="https://notifier.atlas-sbx1.int.sgdbf.saint-gobain.net:20003/notifier/subscribe">
+        </div>
+		<div class="form-group">
+          <input type="text" id="api" class="form-control" placeholder="the api url here..." 
+		  value="https://ingress.ibm.ppr.docker4sg.saint-gobain.net:20003/send">
+        </div>
+		<div class="form-group">
+          <textarea id="jwt" class="form-control" placeholder="place jwt token ..." rows="10">eyJhbGciOiJSUzI1NiJ9.ewogICJzdWIiIDogIklITV9WRU5UX0lOVCIsCiAgImlzcyIgOiAiQVhXQVkiLAogICJleHAiIDogIjE2MjU3ODQ3NTQiLAogICJpYXQiIDogIjE2MjU3NDE1NTQiLAogICJzYXBQYXNzd29yZEV4cCIgOiAiW2ludmFsaWQgZmllbGRdIiwKICAic2FwRW52IiA6ICJJWDIiLAogICJzbEF1dGgiIDogIkhZUEVSX0NBUkUsQ1VEX0FHRU5DWV9DUkVESVQsQ1VEX1BBWU1FTlRfREVMRUdBVElPTixBR19WRU5URV9JTlRFUk5FLENfU1RPUkVfQ1JFRElULENfQ1VTVE9NRVJfUkVIQUJJTElUQVRJT04sQ09OU1VMVEFOVF9BTEwsUl9SRVBPUlRfVFVSTk9WRVJfMzZNLENVRF9HUk9VUEUsQ19CQU5LLENVRF9DVVNUT01FUixSXzJDLFNNX1ZFTlRFX0lOVEVSTkUsUl8yRCxSX0NVU1RPTUVSLFJfMkIsQ19DVVNUT01FUixBVVRIRU5USUNBVEVEIiwKICAiYXVkIiA6ICJTTCIKfQ.SH_ReMi_zciQFw8He4QWHjqXb_bcOYPv7_1aLCKQDLiAkpbf_JRruUA_wTAYhbAMe6tRbLfrsH81tL892q26zOziXholgBCvh2udAU0TiKaQ1BsZSD8u3GFSUMyXmAbvsVEMMfULPbDiaz0L8o55JQ6GQT_wOi3LR10zgdHX518hXFgtTJ8YJ62VE0-3MinwTNXncmyr2CZw9wX88jagigWy0GaDdEvNawxxTc9gl_2qCZBkPTNCyOCcxdfcprt0nu3g456kA0TN9Gt3eQb1H3B-63mO60fZNxqBbovedHSFb0rXSCMHxQWNI5P9ZGDoEkfX5VPaSdv4jNk90vW9Iw</textarea>
+        </div>
+		<div class="form-group">
+          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+	 <div class="col-md-12">
+      <form class="form">
+	    <div class="form-group">
+          <label for="channel">Destination :</label>
+          <input type="text" id="destination" class="form-control" placeholder="Your name here..." value="/topic/mep-notification">
+        </div>
+        <div class="form-group">
+          <label for="channel">Channel :</label>
+          <input type="text" id="channel" class="form-control" placeholder="Your chanel here...">
+        </div>
+        <div class="form-group">
+          <label for="message">Message :</label>
+          <input type="text" id="message" class="form-control" placeholder="Your message here...">
+        </div>
+        <button id="send" class="btn btn-default" type="submit">Send</button>
+		<button id="run" class="btn btn-default" type="submit">Run Stress Test</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline">
+	    <div class="form-group m-2" id="connexions">
+        </div>
+		<div class="form-group m-2" id="subscriptions">
+        </div>
+        <div class="form-group m-2" id="publishMessages">
+        </div>
+		<div class="form-group m-2" id="receiveMessages">
+        </div>
+		<div class="form-group m-2" id="httpResponses">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Channel "poc"</th>
+        </tr>
+        </thead>
+        <tbody id="greetings">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

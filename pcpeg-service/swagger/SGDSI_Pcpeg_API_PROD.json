@@ -1,0 +1,2688 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Pcpeg API documentation",
+    "version" : "1.0",
+    "title" : "SGDSI Pcpeg API"
+  },
+  "host" : "pcpeg.prod.c1.api.dps.saint-gobain.com",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "authority-settings"
+  }, {
+    "name" : "campaigns"
+  }, {
+    "name" : "companies"
+  }, {
+    "name" : "csp"
+  }, {
+    "name" : "directory-users"
+  }, {
+    "name" : "email-templates"
+  }, {
+    "name" : "facilities"
+  }, {
+    "name" : "funds"
+  }, {
+    "name" : "tenant-accounts"
+  }, {
+    "name" : "years"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/authority-settings/companies/{societeSid}" : {
+      "get" : {
+        "tags" : [ "authority-settings" ],
+        "summary" : "Get all authority settings",
+        "description" : "",
+        "operationId" : "getAllAuthoritySettings",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/AuthoritySettingDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "authority-settings" ],
+        "summary" : "create or Update PeParHabilitations",
+        "description" : "",
+        "operationId" : "createOrUpdateAuthoritySetting",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AuthoritySettingDTO"
+          }
+        }, {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeParHabilitations"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/authority-settings/{authorityId}/companies/{societeSid}" : {
+      "delete" : {
+        "tags" : [ "authority-settings" ],
+        "summary" : "Delete the authority setting",
+        "description" : "",
+        "operationId" : "deleteAuthoritySetting",
+        "parameters" : [ {
+          "name" : "authorityId",
+          "in" : "path",
+          "description" : "authorityId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns" : {
+      "get" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Get all campaigns",
+        "description" : "",
+        "operationId" : "getAllCampaigns",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "query",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "statutId",
+          "in" : "query",
+          "description" : "statutId",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/CampaignView"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Create a campaign",
+        "description" : "",
+        "operationId" : "createCampaign",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "query",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "copyPrevious",
+          "in" : "query",
+          "description" : "copyPrevious",
+          "required" : false,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeParSuiviSocietes"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/campaigns/years/{year}/close" : {
+      "post" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Close the campaign",
+        "description" : "",
+        "operationId" : "closeCampaign",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimAnnee"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/campaigns/years/{year}/open" : {
+      "post" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Open the campaign",
+        "description" : "",
+        "operationId" : "openCampaign",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimAnnee"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/companies/{societeId}/years/{year}/users" : {
+      "delete" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Delete the correspondant N",
+        "description" : "",
+        "operationId" : "deleteCorrespondant",
+        "parameters" : [ {
+          "name" : "societeId",
+          "in" : "path",
+          "description" : "societeId",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/companies/{societeId}/years/{year}/users/{sgid}" : {
+      "post" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Replace the correspondant N",
+        "description" : "",
+        "operationId" : "replaceCorrespondant",
+        "parameters" : [ {
+          "name" : "societeId",
+          "in" : "path",
+          "description" : "societeId",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sgid",
+          "in" : "path",
+          "description" : "sgid",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "isNotified",
+          "in" : "query",
+          "description" : "isNotified",
+          "required" : false,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/download" : {
+      "get" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Download campaigns excel",
+        "description" : "",
+        "operationId" : "downloadCampaigns",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "query",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "statutId",
+          "in" : "query",
+          "description" : "statutId",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Attachment Successfully Downloaded",
+            "schema" : {
+              "$ref" : "#/definitions/ByteArrayResource"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/email" : {
+      "post" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Notify correspondants",
+        "description" : "",
+        "operationId" : "notifyCorrespondants",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/CorrespondantDTO"
+            }
+          }
+        }, {
+          "name" : "isReminder",
+          "in" : "query",
+          "description" : "isReminder",
+          "required" : false,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/campaigns/stats/years/{year}" : {
+      "get" : {
+        "tags" : [ "campaigns" ],
+        "summary" : "Get campaigns stats",
+        "description" : "",
+        "operationId" : "getCampaignStats",
+        "parameters" : [ {
+          "name" : "year",
+          "in" : "path",
+          "description" : "year",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/CampaignStatsDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Get all companies",
+        "description" : "",
+        "operationId" : "getAllCompanies",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimSocieteDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "companies" ],
+        "summary" : "Create a company",
+        "description" : "",
+        "operationId" : "createCompany",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "peDimSocieteDTO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PeDimSocieteDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimSociete"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/adherents-count" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Get all flagged adherent companies",
+        "description" : "",
+        "operationId" : "getFlagAdherentCompanies",
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/download" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Download the Companies",
+        "description" : "",
+        "operationId" : "downloadCompanies",
+        "responses" : {
+          "200" : {
+            "description" : "Attachment Successfully Downloaded",
+            "schema" : {
+              "$ref" : "#/definitions/ByteArrayResource"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/settings/{societeSid}/documents/{documentId}/download" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Download document for a company setting",
+        "description" : "",
+        "operationId" : "downloadDocument",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "documentId",
+          "in" : "path",
+          "description" : "documentId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "format" : "byte"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/settings/{societeSid}/paymentTypes/{paymentTypeId}" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Get the Company Setting for payment type",
+        "description" : "",
+        "operationId" : "getCompanySettingsByIdAndPaymentType",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "paymentTypeId",
+          "in" : "path",
+          "description" : "paymentTypeId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/CompanySettingDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "companies" ],
+        "summary" : "Create or Update the Company Setting for payment type",
+        "description" : "",
+        "operationId" : "validateCompanySettingsByIdAndPaymentType",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "paymentTypeId",
+          "in" : "path",
+          "description" : "paymentTypeId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "companySettingValidationDTO",
+          "in" : "formData",
+          "required" : true,
+          "type" : "ref"
+        }, {
+          "name" : "file",
+          "in" : "formData",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "file"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/CompanySettingDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/settings/{societeSid}/paymentTypes/{paymentTypeId}/fund" : {
+      "post" : {
+        "tags" : [ "companies" ],
+        "summary" : "Create or update fund in settings",
+        "description" : "",
+        "operationId" : "createOrUpdateFund",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "paymentTypeId",
+          "in" : "path",
+          "description" : "paymentTypeId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "fundDTO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FundDTO"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/FundDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/settings/{societeSid}/validate" : {
+      "post" : {
+        "tags" : [ "companies" ],
+        "summary" : "Validate all the Company Settings",
+        "description" : "",
+        "operationId" : "validateCompanySettings",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/{societeSid}" : {
+      "get" : {
+        "tags" : [ "companies" ],
+        "summary" : "Get the Company",
+        "description" : "",
+        "operationId" : "getCompanyById",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimSocieteDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "companies" ],
+        "summary" : "Update a company",
+        "description" : "",
+        "operationId" : "updateCompany",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "company",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PeDimSocieteDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimSocieteDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "companies" ],
+        "summary" : "Delete the company",
+        "description" : "",
+        "operationId" : "deleteCompany",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/companies/{societeSid}/comment" : {
+      "put" : {
+        "tags" : [ "companies" ],
+        "summary" : "Update a comment",
+        "description" : "",
+        "operationId" : "addComment",
+        "parameters" : [ {
+          "name" : "societeSid",
+          "in" : "path",
+          "description" : "societeSid",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "comment",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimSocieteDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/csp" : {
+      "get" : {
+        "tags" : [ "csp" ],
+        "summary" : "Get all Csp",
+        "description" : "",
+        "operationId" : "getAllCsp",
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimCsp"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/directory-users" : {
+      "get" : {
+        "tags" : [ "directory-users" ],
+        "summary" : "Get all directory users",
+        "description" : "",
+        "operationId" : "getAllDirectoryUsers",
+        "parameters" : [ {
+          "name" : "sgid",
+          "in" : "query",
+          "description" : "sgid",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "firstName",
+          "in" : "query",
+          "description" : "firstName",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "lastName",
+          "in" : "query",
+          "description" : "lastName",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/email-templates/{formulaireId}" : {
+      "get" : {
+        "tags" : [ "email-templates" ],
+        "summary" : "Get the Email Template",
+        "description" : "",
+        "operationId" : "getEmailTemplateById",
+        "parameters" : [ {
+          "name" : "formulaireId",
+          "in" : "path",
+          "description" : "formulaireId",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeRefFormulaire"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "put" : {
+        "tags" : [ "email-templates" ],
+        "summary" : "Update a Email Template",
+        "description" : "",
+        "operationId" : "updateEmailTemplate",
+        "parameters" : [ {
+          "name" : "formulaireId",
+          "in" : "path",
+          "description" : "formulaireId",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EmailTemplateDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeRefFormulaire"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/facilities" : {
+      "get" : {
+        "tags" : [ "facilities" ],
+        "summary" : "Get all Facilities",
+        "description" : "",
+        "operationId" : "getAllFacilities",
+        "parameters" : [ {
+          "name" : "label",
+          "in" : "query",
+          "description" : "label",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "isActive",
+          "in" : "query",
+          "description" : "isActive",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "societeSid",
+          "in" : "query",
+          "description" : "societeSid",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "codeSif",
+          "in" : "query",
+          "description" : "codeSif",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimEtablissement"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "facilities" ],
+        "summary" : "Create or Update a Facility",
+        "description" : "",
+        "operationId" : "createOrUpdateFacility",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "FacilityDTO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FacilityDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimEtablissement"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/facilities/companies" : {
+      "get" : {
+        "tags" : [ "facilities" ],
+        "summary" : "Get all distinct companies",
+        "description" : "",
+        "operationId" : "getDistinctCompanies",
+        "parameters" : [ {
+          "name" : "codeSif",
+          "in" : "query",
+          "description" : "codeSif",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "companyLabel",
+          "in" : "query",
+          "description" : "companyLabel",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/facilities/download" : {
+      "get" : {
+        "tags" : [ "facilities" ],
+        "summary" : "Download the Facilities",
+        "description" : "",
+        "operationId" : "downloadFacilities",
+        "parameters" : [ {
+          "name" : "label",
+          "in" : "query",
+          "description" : "label",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "isActive",
+          "in" : "query",
+          "description" : "isActive",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "societeSid",
+          "in" : "query",
+          "description" : "societeSid",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "codeSif",
+          "in" : "query",
+          "description" : "codeSif",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Attachment Successfully Downloaded",
+            "schema" : {
+              "$ref" : "#/definitions/ByteArrayResource"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/funds" : {
+      "get" : {
+        "tags" : [ "funds" ],
+        "summary" : "Get all funds",
+        "description" : "",
+        "operationId" : "getAllFunds",
+        "parameters" : [ {
+          "name" : "isActive",
+          "in" : "query",
+          "description" : "isActive",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "label",
+          "in" : "query",
+          "description" : "label",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "groups",
+          "in" : "query",
+          "description" : "groups",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi",
+          "x-example" : "groups=DIV,PCL or groups=DIV&groups=PCL"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/FundDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "funds" ],
+        "summary" : "Create a fund",
+        "description" : "",
+        "operationId" : "createFund",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "fundDTO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FundDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/FundDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/funds/download" : {
+      "get" : {
+        "tags" : [ "funds" ],
+        "summary" : "Download the Funds",
+        "description" : "",
+        "operationId" : "dowloadFunds",
+        "parameters" : [ {
+          "name" : "label",
+          "in" : "query",
+          "description" : "label",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "groups",
+          "in" : "query",
+          "description" : "groups",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi",
+          "x-example" : "groups=DIV,PCL or groups=DIV&groups=PCL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Attachment Successfully Downloaded",
+            "schema" : {
+              "$ref" : "#/definitions/ByteArrayResource"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/funds/{fundId}" : {
+      "put" : {
+        "tags" : [ "funds" ],
+        "summary" : "Update a fund",
+        "description" : "",
+        "operationId" : "updateFund",
+        "parameters" : [ {
+          "name" : "fundId",
+          "in" : "path",
+          "description" : "fundId",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "fundDTO",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FundDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/FundDTO"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/tenant-accounts" : {
+      "get" : {
+        "tags" : [ "tenant-accounts" ],
+        "summary" : "Get all tenant accounts",
+        "description" : "",
+        "operationId" : "getAllTenantAccounts",
+        "parameters" : [ {
+          "name" : "label",
+          "in" : "query",
+          "description" : "label",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N), default value = O",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "size",
+          "in" : "query",
+          "description" : "Number of records per page, default value = 20",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "sort",
+          "in" : "query",
+          "description" : "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeRefTeneurCompte"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    },
+    "/years" : {
+      "get" : {
+        "tags" : [ "years" ],
+        "summary" : "Get years",
+        "description" : "",
+        "operationId" : "getYears",
+        "responses" : {
+          "200" : {
+            "description" : "Request Successfully completed",
+            "schema" : {
+              "$ref" : "#/definitions/PeDimAnnee"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        },
+        "security" : [ {
+          "jwt" : [ ]
+        } ]
+      }
+    }
+  },
+  "definitions" : {
+    "AuthoritySettingDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "firstname" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "telephone" : {
+          "type" : "string"
+        },
+        "sgid" : {
+          "type" : "string"
+        },
+        "category" : {
+          "type" : "string"
+        },
+        "year" : {
+          "type" : "string"
+        },
+        "facility" : {
+          "$ref" : "#/definitions/FacilityDTO"
+        }
+      },
+      "description" : "AuthoritySetting DTO"
+    },
+    "ByteArrayResource" : {
+      "type" : "object",
+      "properties" : {
+        "byteArray" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "inputStream" : {
+          "$ref" : "#/definitions/InputStream"
+        },
+        "open" : {
+          "type" : "boolean"
+        },
+        "file" : {
+          "type" : "file"
+        },
+        "url" : {
+          "type" : "string",
+          "format" : "url"
+        },
+        "readable" : {
+          "type" : "boolean"
+        },
+        "uri" : {
+          "type" : "string",
+          "format" : "uri"
+        },
+        "filename" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CampaignStatsDTO" : {
+      "type" : "object",
+      "properties" : {
+        "companyAdherentCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "companyValidatedCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "description" : "CampaignStats DTO"
+    },
+    "CampaignView" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/PeParSuiviSocietesId"
+        },
+        "codeSif" : {
+          "type" : "string"
+        },
+        "codeAmundi" : {
+          "type" : "string"
+        },
+        "societeLibelle" : {
+          "type" : "string"
+        },
+        "flagAdherente" : {
+          "type" : "boolean"
+        },
+        "active" : {
+          "type" : "boolean"
+        },
+        "flagEnCours" : {
+          "type" : "boolean"
+        },
+        "formulaireLibelle" : {
+          "type" : "string"
+        },
+        "statutId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "statutLibelle" : {
+          "type" : "string"
+        },
+        "dateDernierMail" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "flagEnvoieMail" : {
+          "type" : "boolean"
+        },
+        "flagRelanceMail" : {
+          "type" : "boolean"
+        },
+        "correspondantActuelId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "correspondantActuelSgid" : {
+          "type" : "string"
+        },
+        "correspondantActuelNom" : {
+          "type" : "string"
+        },
+        "correspondantActuelPrenom" : {
+          "type" : "string"
+        },
+        "correspondantActuelEmail" : {
+          "type" : "string"
+        },
+        "correspondantActuelTelephone" : {
+          "type" : "string"
+        },
+        "correspondantPrecedentId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "correspondantPrecedentSgid" : {
+          "type" : "string"
+        },
+        "correspondantPrecedentNom" : {
+          "type" : "string"
+        },
+        "correspondantPrecedentPrenom" : {
+          "type" : "string"
+        },
+        "correspondantPrecedentEmail" : {
+          "type" : "string"
+        },
+        "correspondantPrecedentTelephone" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CompanySettingDTO" : {
+      "type" : "object",
+      "properties" : {
+        "payment" : {
+          "$ref" : "#/definitions/PaymentDTO"
+        },
+        "documents" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DocumentDTO"
+          }
+        },
+        "funds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FundDTO"
+          }
+        }
+      },
+      "description" : "CompanySetting DTO"
+    },
+    "ContactDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Contact DTO"
+    },
+    "CorrespondantDTO" : {
+      "type" : "object",
+      "properties" : {
+        "societeId" : {
+          "type" : "string"
+        },
+        "year" : {
+          "type" : "string"
+        },
+        "userId" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Correspondant DTO"
+    },
+    "DocumentDTO" : {
+      "type" : "object",
+      "properties" : {
+        "documentId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "startDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "endDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "documentName" : {
+          "type" : "string"
+        },
+        "documentType" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "paymentId" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      },
+      "description" : "Document DTO"
+    },
+    "EmailTemplateDTO" : {
+      "type" : "object",
+      "properties" : {
+        "objetInitial" : {
+          "type" : "string"
+        },
+        "objetRelance" : {
+          "type" : "string"
+        },
+        "mailInitial" : {
+          "type" : "string"
+        },
+        "mailRelance" : {
+          "type" : "string"
+        },
+        "formulaireDateLimiteReponse" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "description" : "EmailTemplate DTO"
+    },
+    "FacilityDTO" : {
+      "type" : "object",
+      "required" : [ "codeSif" ],
+      "properties" : {
+        "facilityId" : {
+          "type" : "string",
+          "minLength" : 5,
+          "maxLength" : 5
+        },
+        "facilityLabel" : {
+          "type" : "string"
+        },
+        "isActive" : {
+          "type" : "string"
+        },
+        "codeSif" : {
+          "type" : "string",
+          "minLength" : 5,
+          "maxLength" : 5
+        },
+        "companyLabel" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Facility DTO"
+    },
+    "FundDTO" : {
+      "type" : "object",
+      "properties" : {
+        "fundId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "fundLabel" : {
+          "type" : "string"
+        },
+        "amundiCode" : {
+          "type" : "string"
+        },
+        "isDefault" : {
+          "type" : "boolean"
+        },
+        "isActive" : {
+          "type" : "boolean"
+        },
+        "contact" : {
+          "$ref" : "#/definitions/ContactDTO"
+        },
+        "tenantAccount" : {
+          "$ref" : "#/definitions/TenantAccountDTO"
+        },
+        "fundGroupId" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Fund DTO"
+    },
+    "InputStream" : {
+      "type" : "object"
+    },
+    "PaymentDTO" : {
+      "type" : "object",
+      "properties" : {
+        "paymentId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "companyId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "year" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "paymentType" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "flagVersement" : {
+          "type" : "boolean"
+        },
+        "flagVersementInfra" : {
+          "type" : "boolean"
+        },
+        "flagVersementBlocPlie" : {
+          "type" : "boolean"
+        }
+      },
+      "description" : "Payment DTO"
+    },
+    "PeDimAnnee" : {
+      "type" : "object",
+      "properties" : {
+        "anneeId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "flagEnCours" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PeDimCsp" : {
+      "type" : "object",
+      "properties" : {
+        "cspId" : {
+          "type" : "string"
+        },
+        "cspLabel" : {
+          "type" : "string"
+        },
+        "isActive" : {
+          "type" : "boolean"
+        },
+        "comments" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PeDimEtablissement" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/PeDimEtablissementId"
+        },
+        "facilityLabel" : {
+          "type" : "string"
+        },
+        "facilityShortLabel" : {
+          "type" : "string"
+        },
+        "isActive" : {
+          "type" : "string"
+        },
+        "societe" : {
+          "$ref" : "#/definitions/PeDimSociete"
+        }
+      }
+    },
+    "PeDimEtablissementId" : {
+      "type" : "object",
+      "properties" : {
+        "facilityId" : {
+          "type" : "string"
+        },
+        "societeSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "PeDimSociete" : {
+      "type" : "object",
+      "properties" : {
+        "societeSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "societeLibelle" : {
+          "type" : "string"
+        },
+        "codeSif" : {
+          "type" : "string"
+        },
+        "codeAmundi" : {
+          "type" : "string"
+        },
+        "flagAdherente" : {
+          "type" : "boolean"
+        },
+        "active" : {
+          "type" : "boolean"
+        },
+        "comments" : {
+          "type" : "string"
+        },
+        "peParSocietes" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PeParSociete"
+          }
+        },
+        "cspId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PeDimSocieteDTO" : {
+      "type" : "object",
+      "properties" : {
+        "societeSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "societeLibelle" : {
+          "type" : "string"
+        },
+        "codeSif" : {
+          "type" : "string"
+        },
+        "codeAmundi" : {
+          "type" : "string"
+        },
+        "flagAdherente" : {
+          "type" : "boolean"
+        },
+        "comments" : {
+          "type" : "string"
+        },
+        "cspId" : {
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 3
+        }
+      },
+      "description" : "PeDimSociete DTO"
+    },
+    "PeDimTypeVersement" : {
+      "type" : "object",
+      "properties" : {
+        "typeVersementSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "typeVersementLibelle" : {
+          "type" : "string"
+        },
+        "flagExisteInfra" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PeDimUtilisateurs" : {
+      "type" : "object",
+      "properties" : {
+        "utilisateurId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "sgid" : {
+          "type" : "string"
+        },
+        "nom" : {
+          "type" : "string"
+        },
+        "prenom" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "telephone" : {
+          "type" : "string"
+        },
+        "flagActif" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "PeParHabilitations" : {
+      "type" : "object",
+      "properties" : {
+        "habilitationsSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "peParSociete" : {
+          "$ref" : "#/definitions/PeParSociete"
+        },
+        "etablissementId" : {
+          "type" : "string"
+        },
+        "etablissement" : {
+          "$ref" : "#/definitions/PeDimEtablissement"
+        },
+        "sgid" : {
+          "type" : "string"
+        },
+        "nom" : {
+          "type" : "string"
+        },
+        "prenom" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "telephone" : {
+          "type" : "string"
+        },
+        "logUtilisateurId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "logDateMaj" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "category" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PeParSociete" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/PeParSocieteId"
+        },
+        "peDimUtilisateurs" : {
+          "$ref" : "#/definitions/PeDimUtilisateurs"
+        },
+        "peDimSociete" : {
+          "$ref" : "#/definitions/PeDimSociete"
+        },
+        "peDimAnnee" : {
+          "$ref" : "#/definitions/PeDimAnnee"
+        },
+        "logUtilisateurId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "logDateMaj" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "utilisateurIdTempo" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "peParSuiviSocieteses" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PeParSuiviSocietes"
+          }
+        },
+        "peParVersements" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PeParVersement"
+          }
+        },
+        "peParHabilitationses" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PeParHabilitations"
+          }
+        }
+      }
+    },
+    "PeParSocieteId" : {
+      "type" : "object",
+      "properties" : {
+        "societeSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "anneeId" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "PeParSuiviSocietes" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/PeParSuiviSocietesId"
+        },
+        "peRefStatutFormulaire" : {
+          "$ref" : "#/definitions/PeRefStatutFormulaire"
+        },
+        "peParSociete" : {
+          "$ref" : "#/definitions/PeParSociete"
+        },
+        "peRefFormulaire" : {
+          "$ref" : "#/definitions/PeRefFormulaire"
+        },
+        "flagChangement" : {
+          "type" : "boolean"
+        },
+        "logUtilisateurId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "logDateMaj" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "PeParSuiviSocietesId" : {
+      "type" : "object",
+      "properties" : {
+        "societeSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "anneeId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "formulaireId" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "PeParVersement" : {
+      "type" : "object",
+      "properties" : {
+        "parVersementSid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "peParSociete" : {
+          "$ref" : "#/definitions/PeParSociete"
+        },
+        "peDimTypeVersement" : {
+          "$ref" : "#/definitions/PeDimTypeVersement"
+        },
+        "flagBlocPlie" : {
+          "type" : "boolean"
+        },
+        "flagVersement" : {
+          "type" : "boolean"
+        },
+        "flagVersementInfra" : {
+          "type" : "boolean"
+        },
+        "logUtilisateurId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "logDateMaj" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "PeRefFormulaire" : {
+      "type" : "object",
+      "properties" : {
+        "formulaireId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "formulaireLibelle" : {
+          "type" : "string"
+        },
+        "formulaireDateLimiteReponse" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "objetInitial" : {
+          "type" : "string"
+        },
+        "objetRelance" : {
+          "type" : "string"
+        },
+        "mailInitial" : {
+          "type" : "string"
+        },
+        "mailRelance" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PeRefStatutFormulaire" : {
+      "type" : "object",
+      "properties" : {
+        "statutId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "statutLibelle" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PeRefTeneurCompte" : {
+      "type" : "object",
+      "properties" : {
+        "teneurCompteId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "teneurCompteLibelle" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TenantAccountDTO" : {
+      "type" : "object",
+      "properties" : {
+        "teneurCompteId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "teneurCompteLibelle" : {
+          "type" : "string"
+        }
+      },
+      "description" : "TenantAccount DTO"
+    },
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "stGoSGI" : {
+          "type" : "string"
+        },
+        "givenName" : {
+          "type" : "string"
+        },
+        "sn" : {
+          "type" : "string"
+        },
+        "cn" : {
+          "type" : "string"
+        },
+        "mail" : {
+          "type" : "string"
+        },
+        "telephoneNumber" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

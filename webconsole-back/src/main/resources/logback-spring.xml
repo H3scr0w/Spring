@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+    <springProfile name="uat">
+        <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-/tmp/}website4sg-core-uat.log}"/>
+    </springProfile>
+    <springProfile name="prod">
+        <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-/tmp/}website4sg-core-prod.log}"/>
+    </springProfile>
+
+    <include resource="com/saintgobain/dsi/boot/logging/logback/saintgobain-base.xml"/>
+    <include resource="com/saintgobain/dsi/boot/logging/logback/saintgobain-swagger-base.xml"/>
+    <jmxConfigurator/>
+
+    <logger name="org.springframework.cloud" level="INFO" />
+    <logger name="sun.net.www.protocol.http.HttpURLConnection" level="INFO" />
+    <logger name="de.codecentric.boot.admin.client.registration" level="INFO" />
+    <logger name="com.saintgobain.dsi.website4sg.core" level="DEBUG"/>
+
+    <root level="#logback.loglevel#">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

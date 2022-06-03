@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.sgdbf.starter.logger.autoconfigure.LoggingContextAutoConfiguration

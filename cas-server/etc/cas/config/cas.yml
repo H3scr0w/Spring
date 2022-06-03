@@ -1,0 +1,171 @@
+cas:
+  logout:
+    followServiceRedirects: true
+  server:
+    name: https://localhost:8443
+    prefix: https://localhost:8443/cas
+  adminPagesSecurity:
+    ip: 127.0.0.1
+  serviceRegistry:
+    initFromJson: true
+    json:
+        location: file:/etc/cas/services
+  # TO ENABLE FOR WSIP (ST in JWT)
+  ticket:
+    st:
+        numberOfUses: 2
+        timeToKillInSeconds: 60
+  authn:
+    pm:
+      enabled: true
+      policyPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}
+      autoLogin: false
+      reset:
+        expirationMinutes: 10
+        securityQuestionsEnabled: false
+        mail:
+          from: no-reply.dsweb@saint-gobain.com
+          subject: Reset Password
+          attributeName: uid
+      ldap:
+        type: GENERIC
+        ldapUrl: ldap://localhost:1389
+        bindDn: 'CN=Directory Manager'
+        bindCredential: sgds2016
+        baseDn: dc=WsipLDAP,dc=net
+        searchFilter: uid={user}
+        minPoolSize: 10
+        maxPoolSize: 50
+        responseTimeout: PT2M
+        connectTimeout: PT5S
+        useSsl: false
+    policy:
+      all:
+        enabled: true
+      any:
+        tryAll: true
+    accept:
+        users:
+        name:
+        credentialCriteria:
+    # TO ENABLE FOR WSIP (Authentication with JWT)
+    token:
+        crypto:
+            encryptionEnabled: false
+            signing:
+                key: file:/etc/cas/config/private.key
+                keySize: 2048 
+    authenticationAttributeRelease:
+        onlyRelease: sub,iss,aud,exp
+    releaseProtocolAttributes: false
+    attributeRepository:
+        merger: ADD
+        defaultAttributesToRelease: sAMAccountName,stGoSGI,uid,groups,accessRights
+        expirationTime: 1
+        expirationTimeUnit: MINUTES
+        jdbc:
+            -
+             username: uid
+             singleRow: false
+             requireAllAttributes: false
+             caseCanonicalization: NONE
+             columnMappings:
+                attrname: attrvalue  
+             sql: select attrname, attrvalue from CAS_VIEW where USER_EMAIL = ?
+             url: jdbc:mysql://localhost:3306/website4sg?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+             healthQuery: SELECT 1
+             dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+             driverClass: com.mysql.cj.jdbc.Driver
+             ddlAuto: none
+             user: root
+             password: root
+             pool:
+                minSize: 10
+                maxSize: 50
+                maxWait: 2000
+                timeoutMillis: 1000
+            -
+             username: uid
+             singleRow: true
+             requireAllAttributes: false
+             caseCanonicalization: NONE  
+             sql: select user_isactive from USERS where USER_EMAIL = ?
+             url: jdbc:mysql://localhost:3306/website4sg?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+             healthQuery: SELECT 1
+             dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+             driverClass: com.mysql.cj.jdbc.Driver
+             ddlAuto: none
+             user: root
+             password: root
+             pool:
+                minSize: 10
+                maxSize: 50
+                maxWait: 2000
+                timeoutMillis: 1000
+    samlIdp:
+      entityId: localhost:8443
+      response:
+        defaultAttributeNameFormat: unspecified
+        skewAllowance: 60                 
+    ldap:
+      # -
+        # # TO ENABLE FOR AD
+        # type: AUTHENTICATED
+        # ldapUrl: ldaps://A00DCZAJOH01.za.if.atcsg.net:3269 
+        # bindDn: CN=A00SVC-GROUPDIR,OU=Service Accounts,OU=A00-ITGlobalTeam,DC=za,DC=if,DC=atcsg,DC=net
+        # bindCredential: 4!dZgPxB602j
+        # baseDn: DC=za,DC=if,DC=atcsg,DC=net        
+        # searchFilter: sAMAccountName={user} 
+        # dnFormat: CN={user},OU=Users
+        # principalAttributeId: sAMAccountName
+        # principalAttributeList: memberOf
+        # minPoolSize: 10
+        # maxPoolSize: 50
+        # responseTimeout: PT2M
+        # connectTimeout: PT5S
+      # -
+        # # TO ENABLE FOR GD
+        # type: AUTHENTICATED
+        # ldapUrl: ldaps://uat.directory.saint-gobain.com:636
+        # bindDn: 
+        # bindCredential: 
+        # baseDn: ou=Persons,dc=CorpLdap,dc=atcsg,dc=net
+        # searchFilter: stGoSGI={user}
+        # dnFormat: stGoSGI={user},ou=Persons,dc=CorpLdap,dc=atcsg,dc=net
+        # principalAttributeId: stGoSGI
+        # principalAttributeList: isMemberOf
+        # minPoolSize: 10
+        # maxPoolSize: 50
+        # responseTimeout: PT2M
+        # connectTimeout: PT5S          
+      -
+       # TO ENABLE FOR WSIP
+       type: AUTHENTICATED
+       ldapUrl: ldap://localhost:1389
+       bindDn: 'CN=Directory Manager'
+       bindCredential: sgds2016
+       baseDn: dc=WsipLDAP,dc=net
+       searchFilter: uid={user}
+       dnFormat: uid={user},ou=WsipUser
+       principalAttributeId: uid
+       minPoolSize: 10
+       maxPoolSize: 50
+       responseTimeout: PT2M
+       connectTimeout: PT5S
+       useSsl: false        
+logging:
+  config: file:/etc/cas/config/log4j2.xml
+spring:
+  mail:
+    host: localhost
+    username:
+    password:
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+    protocol: smtp
+    test-connection: false

@@ -1,0 +1,126 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+spring:
+  application:
+    name: website4sg-core
+  main:
+    lazy-initialization: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: false
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate.id.new_generator_mappings: false
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.region.factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+      hibernate.javax.cache.provider: com.hazelcast.client.cache.impl.HazelcastClientCachingProvider
+      hibernate.cache.use_minimal_puts: true
+      hibernate.cache.hazelcast.use_lite_member: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  jackson:
+    mapper:
+      accept-case-insensitive-properties: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["*"]
+  endpoint:
+    health:
+      show-details: always
+  info:
+    git:
+      mode: full
+  health:
+    mail:
+      enabled: false
+
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: true
+  ssl:
+    key-store: file:/home/website4sg/website4sg.jks
+    key-password: changeit
+    key-store-type: JKS
+
+info:
+  env: ${spring.profiles.active:dev}
+  config: ${spring.profiles.active:dev}
+  service:
+    name: ${spring.application.name}
+    host: ${HOST:localhost}
+    port: ${server.port}
+
+saint:
+  gobain:
+    # Configuration of swagger
+    swagger:
+      default-include-pattern: /(v1|tools).*
+      title: Website4sg Core
+      description: Website4sg Core API documentation
+      version: 1
+    # By default log is disable for project.
+    # Define package or annotate with @SaintGobainLogging to your class or method to log out
+    aop:
+      logging:
+        enabled: true
+        base-packages:
+          - com.saintgobain.dsi.website4sg.core.service
+          - com.saintgobain.dsi.website4sg.core.web.rest
+    cache:
+      hazelcast:
+        instanceName: website4sg-core
+        packageName: com.saintgobain.dsi.website4sg.core.*
+    security:
+      wsip:
+        jwt-public-key: /appl/website4sg/config/public.key
+        exposure:
+          exclude:
+          - /v1/rundeck/callback**
+    group:
+      admin: "*:*:ADMIN"
+    api:
+      rundeck:
+        url: http://rundeck:4440/api/18
+        token: test
+      deployment:
+        url: http://website4sg:8080/v1/deployment
+      nexus:
+        url: http://nexus:3330/api/
+        basic-header: basicHeader
+      open-dj:
+        path: http://opendj:5550/api/
+        basic-header: basicHeader
+      qualys:
+        url: https://qualysapi.qualys.eu/qps/rest/3.0
+      incapsula:
+        url: https://my.incapsula.com
+      acquia:
+        api-url: https://cloud.acquia.com/api
+        token-url: https://accounts.acquia.com/api

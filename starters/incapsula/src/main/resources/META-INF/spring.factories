@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.saintgobain.dsi.starter.incapsula.autoconfigure.IncapsulaRestTemplateAutoConfiguration,\
+com.saintgobain.dsi.starter.incapsula.service.SiteService,\
+com.saintgobain.dsi.starter.incapsula.service.ThreatService,\
+com.saintgobain.dsi.starter.incapsula.service.AclService,\
+com.saintgobain.dsi.starter.incapsula.service.SiteCertificateService,\
+com.saintgobain.dsi.starter.incapsula.service.CacheService,\
+com.saintgobain.dsi.starter.incapsula.service.TrafficService

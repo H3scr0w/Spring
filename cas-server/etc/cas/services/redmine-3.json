@@ -1,0 +1,35 @@
+{
+	"@class": "org.apereo.cas.services.RegexRegisteredService",
+	"serviceId": "^(https|http)://.*(support.website4sg.saint-gobain.(com|io))/?.*$",
+	"name": "Redmine",
+	"id": 3,
+	"accessStrategy": {
+		"@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+		"enabled": true,
+		"ssoEnabled": true,
+		"requireAllAttributes": false,
+		"rejectedAttributes" : {
+		  "@class" : "java.util.HashMap",
+		  "user_isactive" : [ "java.util.HashSet", [ false ] ]
+		}
+	},
+	"attributeReleasePolicy": {
+		"@class": "org.apereo.cas.services.ChainingAttributeReleasePolicy",
+		"policies": ["java.util.ArrayList", [{
+				"@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
+				"allowedAttributes": {
+					"@class": "java.util.TreeMap",
+					"uid": [ "java.util.ArrayList", [ "Login", "Email" ] ],
+					"cn": "Firstname",
+					"sn": "Lastname"
+					
+				}
+			},
+			{
+				"@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+				"allowedAttributes": ["java.util.ArrayList", ["uid", "Login", "Firstname", "Lastname", "Email"]]
+			}
+		]]
+	}
+
+}

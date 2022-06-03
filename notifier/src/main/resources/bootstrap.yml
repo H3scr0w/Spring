@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: notifier
+
+sgdbf:
+  kern:
+    elasticsearch:
+      enabled: false
+      https: false
+      host: localhost
+      port: 9200
+      user: test
+      pass: test
+      application: atlas-${spring.application.name}
+      maxQueueSize: 26214400
+      maxMessageSize: 26214400
